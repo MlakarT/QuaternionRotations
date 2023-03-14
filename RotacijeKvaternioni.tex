@@ -15,10 +15,11 @@
 \def\C{\mathbb{C}} % mnozica kompleksnih stevil
 \def\H{\mathbb{H}} % mnozica kvaternionov
 \def\E{\mathbb{E}} % evklidski prostor 
-\def\Qe{Q_{e}} % mnozica versorjev
-\def\Ue{U_{e}} % mnozica pravih versorjev
+\def\Qe{\textbf{Q}_{e}} % mnozica versorjev
+\def\Ue{\textbf{U}_{e}} % mnozica pravih versorjev
 \def\1{\textbf{\emph{1}}}
 \newcommand{\geslo}[2]{\noindent\textbf{#1} \quad \hangindent=1cm #2\\[-1pc]}
+\newcommand{\dotpr}[2]{\langle #1, #2 \rangle}
 
 \def\qed{$\hfill\Box$}   % konec dokaza
 \def\qedm{\qquad\Box}   % konec dokaza v matematičnem načinu
@@ -87,15 +88,110 @@ To motivira podobni razmislek za rotacije v $\R^3$.
 
 \begin{definicija}
 Naj bo $V$ $4$-razsežen vektorski prostor nad $R$. Izberemo bazo $\left\{\1, i, j, k\right\}$. Elementi $V$ so oblike $\textbf{q} = q_{0}\1 + q_{1}i + q_{2}j + q_{3}k = q_{0} + \vec{q}.$
-Vektorski prostor $V$ opremimo z operacijo množenja tako, da definiramo množenje njegovih baznih elementov, in sicer:
+Vektorski prostor $V$ opremimo z operacijo množenja tako, da definiramo množenje njegovih baznih elementov, in sicer
 \begin{center}
    $\1 \1 = \1, \hspace{1em}  \1i = i, \hspace{1em} \1j = j, \hspace{1em} \1k = k,$\\
    $ij = k, \hspace{1em} jk = i, \hspace{1em} ki = j,$\\
    $i^2 = j^2 = k^2 = ijk = -1\1$.
 \end{center}
+Naj bosta $p, q \in \H$. Definiramo seštevanje in množenje s skalarjem kot običajno
+\begin{center}
+   $p + q = \left( p_{0} + q_{0} \right) + \left( \vec{p} + \vec{q} \right)$, \\
+   $ \lambda q = \lambda \left(q_{0} + \vec{q} \right) = \lambda q_{0} + \left(\lambda \vec{q}\right) $.
+\end{center}
+Prav tako definiramo običajno množenje v skladu z definicijo množenja baznih elementov. Tedaj lahko
+produkt $pq$ napišemo kot
+\begin{center}
+   $pq = (p_{0} + q_{0} - \vec{p} \vec{q}) + (p_{0}\vec{q} + q_{0}\vec{p} + \vec{p}\times\vec{q})$,
+\end{center}
+kjer je $\vec{p}\vec{q}$ običajni skalarni produkt v $\R^3$.
 Tedaj $V$ postane $4$-razsežna algebra nad $\R$. Označimo $\H$ in jo imenujemo \emph{Kvaternionska algebra}.
 \end{definicija}
 
+\begin{opomba}
+Za $p,q \in \H, \lambda \in \R$ velja
+\begin{center}
+      $(\lambda p)q = p(\lambda q) = \lambda (pq)$.
+\end{center}
+\end{opomba}
+
+% tukej pride mal zgodovine o kvaternionih, zgodba od Hamiltona
+
+\begin{definicija}
+Naj bo $q = q_{0} + \vec{q}\in \H$. S $\overline{q} = q_{0} -\vec{q}$ označimo \emph{konjugirani kvaternion} q.
+\end{definicija}
+Velja, da je $q\overline{q} \in \R$. Tako lahko definiramo še 
+\begin{center}
+   $q^{-1} = \dfrac{1}{q\overline{q}} \overline{q}$.
+\end{center}
+Prav tako lahko vidimo da je $\overline{p \cdot q} = \overline{q} \cdot \overline{p}$. Ker množenje kvaternionov ni komutativno,
+v splošnem $\overline{pq} \neq \overline{qp}$. Ker je $\H$ algebra, je na njej smiselno definirati skalarni produkt.
+
+\begin{definicija}
+Naj bosta $p,q \in \H$. Definiramo skalarni produkt kvaternionov
+\begin{center}
+   $\langle p,q \rangle = \frac{1}{2} (\overline{p}q + \overline{q}p)$.
+\end{center}
+Norma porojena s skalarnim produktom je tedaj
+\begin{center}
+   $|q| = ||q|| = \sqrt{\langle q, q\rangle}$.
+\end{center}
+\end{definicija}
+
+\begin{opomba}
+Iz definicije norme takoj sledi $\langle q, q\rangle = q\overline{q} = \overline{q}q$.
+Podobno kot absolutna vrednost na $\R$ in $\C$ je norma na kvaternionih multiplikativna.
+\end{opomba}
+Za poljubna $p,q \in \H$ torej velja $|pq| = |p||q|$. Oglejmo si $|pq|^2$
+\begin{center}
+   $|pq|^2 = \langle pq, pq \rangle = pq\overline{pq}$.
+\end{center}
+Spomnimo se, da $\overline{p \cdot q} = \overline{q} \cdot \overline{p}$. Torej je
+\begin{center}
+   $pq\overline{pq} = p\cdot q\cdot \overline{q} \cdot \overline{p} = p |q|^2 \overline{p}$.
+\end{center}
+Ker je $|q|^2$ skalar, pri množenju komutira s kvaternioni. Torej
+\begin{center}
+   $p|q|^2\overline{p} = |q|^2p\overline{p} = |q|^2 |p|^2 = |p|^2 |q|^2$.
+\end{center}
+Sledi torej $|pq| = |p||q|$.
+
+Podobno kot pri rotaciji kompleksne ravnine, kjer množimo s števili iz enotske krožnice, tukaj potrebujemo 
+enotske kvaternione.
+
+\begin{definicija}
+   Naj bo $q \in \H$. Kvaternion q imenujemo \emph{versor} oziroma \emph{enotski kvaternion}, če velja
+   $|q| = 1$. Če je $q \in \H$ poljuben $|q| \neq 1$ versor kvaterniona q dobimo z normiranjem. Označimo ga z $U_{q} = \dfrac{q}{|q|}$. 
+   Množico versorjev označimo s $\Qe$
+
+   Če velja $u \in \H, u = \vec{u}$ in $|u| = 1$, kvaternion u imenujemo \emph{čisti} oziroma \emph{pravi} versor.
+   Množico pravih versorjev označimo z $\Ue$.
+
+   Kvaternione oblike $q = q_{0}\1, q_{0} \in \R$ imenujemo \emph{skalarni kvaternioni.}
+\end{definicija}
+%%%% TUKI SE NEKI MANKA SAM NEVEM KAJ TOCN
+\begin{opomba}
+   Za čista versorja $u, v \in \Ue$ velja da $\dotpr{u}{v} = 0 \iff uv + vu = 0$.
+\end{opomba}
+Naj bosta $u, v \in \Ue$. Za poljuben versor iz $\Ue$ velja $\overline{u} = -u$. Pogledamo $\dotpr{u}{v}$ :
+\begin{center}
+   $\dotpr{u}{v} = \frac{1}{2}(\overline{u}v + \overline{v}u) = \frac{1}{2}(-uv -vu) = -\frac{1}{2}(uv + vu)$.
+\end{center}
+Od tu sledi da $\dotpr{u}{v} = 0 \iff uv + vu = 0$.
+
+Pomembna opazka tu je še naslednja: naj bo $u \in \Ue$. Ker $|u| = 1$ sledi, da je $u$ neničeln kvaternion.
+Ker je $\Ue \subset \H$ in je $\H$ algebra, je vsak neničenli kvaternion obrnljiv. Vemo torej, da obstaja tak $u^{-1}$ da je
+\begin{center}
+   $uu^{-1} = 1$.
+\end{center}
+Ker je za poljuben $q \in \H, q^{-1} = \dfrac{1}{\overline{q}q} \overline{q}$, za $u \in \Ue$ pa velja $u\overline{u} = |u|^2$, je 
+\begin{center}
+   $u^{-1} = \dfrac{\overline{u}}{|u|^2} = \dfrac{-u}{1} = -u$.
+\end{center}
+Če združimo te dve dejstvi sledi, da
+\begin{center}
+   $uu^{-1} = -uu = -u^2 = 1 \Rightarrow u^2 = -1$.
+\end{center}
 \section{Eulerjeva funkcija}
 
 
