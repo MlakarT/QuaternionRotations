@@ -20,6 +20,7 @@
 \def\1{\textbf{\emph{1}}}
 \newcommand{\geslo}[2]{\noindent\textbf{#1} \quad \hangindent=1cm #2\\[-1pc]}
 \newcommand{\dotpr}[2]{\langle #1, #2 \rangle}
+\newcommand{\conj}[1]{\overline{#1}}
 
 \def\qed{$\hfill\Box$}   % konec dokaza
 \def\qedm{\qquad\Box}   % konec dokaza v matematičnem načinu
@@ -139,7 +140,7 @@ Norma porojena s skalarnim produktom je tedaj
 \end{definicija}
 
 \begin{opomba}
-Iz definicije norme takoj sledi $\langle q, q\rangle = q\overline{q} = \overline{q}q$.
+Iz definicije skalarnega produkta takoj sledi $\langle q, q\rangle = q\overline{q} = \overline{q}q$.
 Podobno kot absolutna vrednost na $\R$ in $\C$ je norma na kvaternionih multiplikativna.
 \end{opomba}
 Za poljubna $p,q \in \H$ torej velja $|pq| = |p||q|$. Oglejmo si $|pq|^2$
@@ -179,6 +180,7 @@ Naj bosta $u, v \in \Ue$. Za poljuben versor iz $\Ue$ velja $\overline{u} = -u$.
 \end{center}
 Od tu sledi da $\dotpr{u}{v} = 0 \iff uv + vu = 0$.
 
+\break
 Pomembna opazka tu je še naslednja: naj bo $u \in \Ue$. Ker $|u| = 1$ sledi, da je $u$ neničeln kvaternion.
 Ker je $\Ue \subset \H$ in je $\H$ algebra, je vsak neničenli kvaternion obrnljiv. Vemo torej, da obstaja tak $u^{-1}$ da je
 \begin{center}
@@ -192,6 +194,91 @@ Ker je za poljuben $q \in \H, q^{-1} = \dfrac{1}{\overline{q}q} \overline{q}$, z
 \begin{center}
    $uu^{-1} = -uu = -u^2 = 1 \Rightarrow u^2 = -1$.
 \end{center}
+
+\subsection{Zapis  kvaternionov v polarni obliki}
+
+Podobno kot kompleksna števila lahko kvaternione zapišemo v polarni obliki. T.j.
+kompleksno število $z = \text{x} + i\text{y}$ lahko zapišemo kot $|z|( \cos\theta + i\sin\theta )$. Z \emph{eulerjevo formulo} lahko to kompleksno število
+zapišemo kot $z = e^{i\theta}$.
+
+V kompleksni ravnini je ta zapis dobro definiran, saj imamo le eno kompleksno enoto $i$.
+V kvaternionih pa imamo celo množico čistih enotskih kvaternionov $\Ue$, s katerimi lahko zapišemo kvaternion.
+
+\begin{trditev}
+Naj bo $q \in \H$. Tedaj obstajajo $r, \theta \in \R$ in $u \in \Ue$, da
+\begin{center}
+   $q = r (\1\cos\theta + u\sin\theta)$.
+\end{center}
+\end{trditev}
+
+\begin{opomba}
+Preden dokažemo trditev opazimo, da tukaj zagotavljamo \emph{le obstoj} in ne enoličnosti.
+
+\end{opomba}
+Preprost protiprimer za enoličnost je $q \in \Qe, q = \1\cos\theta + u\sin\theta$.
+Pogledamo $\theta' = -\theta$ in $u' = \conj{u} = -u$. Tedaj je
+\begin{center}
+   $\1\cos\theta' + u'\sin\theta' = \1\cos(-\theta) -u\sin(-\theta) = \1\cos\theta + u\sin\theta = q$.
+\end{center}
+Vidimo, da ima q torej $2$ zapisa.
+
+
+\begin{opomba}
+Če v trditvi za r vzamemo 1, dobimo vse kvaternione oblike $\1\cos\theta + u\sin\theta$. Torej je množica
+$\left\{ \1\cos\theta + u\sin\theta; \theta \in \R , u \in \Ue \right\} $ enaka $\Qe$.
+\end{opomba}
+
+\noindent
+{\em Dokaz:\/} Naj bo $q \in \H$. Razpišemo $q = q_{0} + \vec{q}$.
+Definiramo $q' = \dfrac{1}{|q|}(q_{0} + \vec{q}) = q'_{0} + \vec{q'}$. Velja $|q'| = \dfrac{1}{|q|}|q| = 1$. 
+
+\break
+\noindent
+Ker je $q'_{0}\1$ pravokoten na $\vec{q'}$, velja pitagorov izrek:
+\begin{center}
+   $|q'_{0}|^2 + |\vec{q'}|^2 = |q'|^2 = 1$.
+\end{center} 
+Naj bo $\theta \in \R$. Za $q'_{0}$ vzamemo $\1\cos\theta$. Podobno želimo narediti še s $\vec{q'}$.
+Ker je $\vec{q'}$ čisti kvaternion (t.j. $\vec{q'} \in \H - \R$), želimo k drugemu delu zapisa dati čisti enotski kvaternion.
+Naj bo torej $u \in \Ue$. Pogledamo $\1\cos\theta + u\sin\theta$.
+\begin{center}
+   $|\1\cos\theta + u\sin\theta|^2 = \cos^2\theta + |u|^2\sin^2\theta$. 
+\end{center}
+Ker je $u \in \Ue$, je $|u| = 1$.
+\begin{center}
+   $\Rightarrow \cos^2\theta + \sin^2\theta = 1$.
+\end{center}
+Imamo torej $q' = q'_{0} + \vec{q'} = \1\cos\theta + u\sin\theta$.
+Sledi 
+\begin{center}
+   $q = |q| \cdot q' = |q|(\1\cos\theta + u\sin\theta)$.
+\end{center}
+\qed
+
+Zaradi lažjega računanja bomo polarni zapis kvaternionov spremeniti v eksponentni zapis,
+saj nam to olajša delo pri računanju. Spet se najprej spomnimo kompleksne ravnine, kjer lahko
+vsak $z \in \C$ zapišemo kot $|z|e^{i\varphi}$ za nek $\varphi \in \R$. To naredimo, saj je tako
+algebraična manipulacija kompleksnih izrazov lažja.
+
+Vzamemo Taylorjev razvoj $e^t$. Velja
+\begin{center}
+   $e^t = 1+x+\dfrac{x^2}{2}+\dfrac{x^3}{6}+\dfrac{x^4}{24} + \cdots$.
+\end{center}
+V Taylorjev razvoj vstavimo $t = u\theta, u \in \Ue, \theta \in \R$. Dobimo %Tukej obrazlozi zakaj to lahko nardimo
+\begin{center}
+   $e^{u\theta} = 1 + u\theta + \dfrac{(u\theta)^2}{2} + \dfrac{(u\theta)^3}{6} + \dfrac{(u\theta)^4}{24} + \cdots$.
+\end{center}
+Spomnimo se, da ker je $u \in \Ue$, velja $u^2=-1$. Ker $e^t$ konvergira enakomerno povsod, lahko vrsto preuredimo, in sicer:
+\begin{center}
+   $1 + u\theta + \dfrac{(u\theta)^2}{2} + \dfrac{(u\theta)^3}{6} + \dfrac{(u\theta)^4}{24} + \cdots = (1 + \dfrac{(u\theta)^2}{2} + \dfrac{(u\theta)^4}{24}+ \cdots) + (u\theta + \dfrac{(u\theta)^3}{6} + \cdots) = $
+   $(1-\dfrac{\theta^2}{2}+\dfrac{\theta^4}{24}- \cdots) + u(\theta - \dfrac{\theta^3}{6} +\dfrac{\theta^5}{120} - \cdots)$
+\end{center}
+V levem in desnem oklepaju vidimo taylorjev razvoj funkcij cos in sin. Sledi torej
+\begin{center}
+   $e^{u\theta} = \cos\theta  + u\sin\theta$.
+\end{center}
+Zgornjo trditev lahko sedaj spremenimo v lepšo obliko, t.j. za vsak $q \in \Qe$ obstajata
+$\theta \in \R$ in $u \in \Ue$, da velja $q =  e^{u\theta}$.
 \section{Eulerjeva funkcija}
 
 
