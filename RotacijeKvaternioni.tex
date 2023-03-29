@@ -171,6 +171,8 @@ enotske kvaternione.
    Kvaternione oblike $q = q_{0}\1, q_{0} \in \R$ imenujemo \emph{skalarni kvaternioni.}
 \end{definicija}
 %%%% TUKI SE NEKI MANKA SAM NEVEM KAJ TOCN
+Če vzamemo množici $\Qe$ in $\Ue$ skupaj z operacijo množenja se izkaže, da sta podgrupi edinki $\H$.
+Ker je $\Ue \subseteq \Qe$, je tudi $\Ue$ podgrupa edinka grupe $\Qe$. Ker nobena od teh množic ni zaprta za seštevanje, ni nobena ideal $\H$.
 \begin{opomba}
    Za čista versorja $u, v \in \Ue$ velja da $\dotpr{u}{v} = 0 \iff uv + vu = 0$.
 \end{opomba}
@@ -273,428 +275,574 @@ Spomnimo se, da ker je $u \in \Ue$, velja $u^2=-1$. Ker $e^t$ konvergira enakome
    $1 + u\theta + \dfrac{(u\theta)^2}{2} + \dfrac{(u\theta)^3}{6} + \dfrac{(u\theta)^4}{24} + \cdots = (1 + \dfrac{(u\theta)^2}{2} + \dfrac{(u\theta)^4}{24}+ \cdots) + (u\theta + \dfrac{(u\theta)^3}{6} + \cdots) = $
    $(1-\dfrac{\theta^2}{2}+\dfrac{\theta^4}{24}- \cdots) + u(\theta - \dfrac{\theta^3}{6} +\dfrac{\theta^5}{120} - \cdots)$
 \end{center}
+\break
 V levem in desnem oklepaju vidimo taylorjev razvoj funkcij cos in sin. Sledi torej
 \begin{center}
    $e^{u\theta} = \cos\theta  + u\sin\theta$.
 \end{center}
 Zgornjo trditev lahko sedaj spremenimo v lepšo obliko, t.j. za vsak $q \in \Qe$ obstajata
 $\theta \in \R$ in $u \in \Ue$, da velja $q =  e^{u\theta}$.
-\section{Eulerjeva funkcija}
 
-
-\begin{definicija}
-Za vse $n \in \N$ s $\varphi(n)$ označimo število 
-celih števil iz množice $\{1, 2, \ldots, n\}$, ki so tuja številu $n$.
-Preslikavo $\varphi: \N \to \N$ imenujemo \em{Eulerjeva funkcija}.
-\end{definicija}
-
-\begin{zgled}
-Tabela \ref{fi} prikazuje izračun prvih šest vrednosti funkcije $\varphi(n)$. V $n$-ti vrstici so 
-krepko natisnjena števila med $1$ in $n$, ki so tuja številu $n$. Slika~\ref{fi100} pa grafično prikazuje prvih 100 vrednosti funkcije $\varphi(n)$.
-\begin{table}[h]
-\[
-\begin{array}{clc}
- n & \{1,2,\ldots, n\}          & \varphi(n)       \\
- \hline
- 1 & \{{\bf 1}\}                    &     1      \\
- 2 & \{{\bf 1},2 \}                &     1      \\
- 3 & \{{\bf 1,2},3 \}             &     2      \\
- 4 & \{{\bf 1},2,{\bf 3},4 \} &     2      \\
- 5 & \{{\bf 1,2,3,4},5 \}       &     4      \\
- 6 & \{{\bf 1},2,3,4,{\bf 5},6 \} &     2
-\end{array}
-\] 
-\caption{Vrednosti funkcije $\varphi(n)$ za $n = 1,2,\ldots,6$}\label{fi}
-\end{table}
-
-\begin{figure}[h]
-% \includegraphics{fi100.pdf}
-\caption{Vrednosti funkcije $\varphi(n)$ za $n = 1,2,\ldots,100$}\label{fi100}
-\end{figure}
-\end{zgled}
-
-Računanje $\varphi(n)$ po definiciji je pri velikem $n$ zelo zamudno. Vendar ima 
-Eulerjeva funkcija lepe lastnosti, zaradi katerih lahko njeno vrednost izračunamo
-tudi pri velikem argumentu, če ga le znamo razcepiti na prafaktorje.
-
-Če je $p$ praštevilo, med števili $1,2,\ldots, p$ edinole število $p$ ni tuje številu $p$,
-torej je $\varphi(p) = p-1$. Skoraj prav tako preprosto lahko poiščemo vrednost $\varphi(n)$,
-če je $n$ potenca nekega praštevila.
-
-\begin{trditev}
-\label{fipp}
-Naj bo $p$ praštevilo in $k \in \N$. Potem je $\varphi(p^k) = p^k-p^{k-1}$.
-\end{trditev}
-
-\noindent
-{\em Dokaz:\/} Število $a$ je tuje številu $p^k$ natanko tedaj, ko ni večkratnik praštevila $p$.
-Med števili $1,2,\ldots, p^k$ je natanko $p^k/p = p^{k-1}$ večkratnikov števila $p$, torej je $\varphi(p^k) = p^k-p^{k-1}$. 
-\qed
-
-\begin{izrek}
-\label{fimult}
-Eulerjeva funkcija je multiplikativna.
-\end{izrek}
-
-\noindent
-{\em Dokaz:\/} Vzemimo tuji naravni števili $a$ in $b$. Zapišimo vsa števila med $1$ in $ab$
-v obliki tabele z $a$ vrsticami in $b$ stolpci:
-\[
-\begin{array}{cccc}
-1 & 2 & \cdots & \ b \\
-b+1 & b+2 & \cdots & \ 2b \\
-2b+1 & 2b+2 & \cdots & \ 3b \\
-\vdots & \vdots & \cdots & \ \vdots \\
-(a-1)b+1 & (a-1)b+2 & \cdots & \ ab 
-\end{array}
-\]
-Za vsako število velja, da je tuje številu $ab$ natanko tedaj, ko je tuje številu $a$ in tuje številu $b$.
-Vrednost $\varphi(ab)$ lahko torej dobimo tako, da preštejemo, koliko je v gornji tabeli števil, ki so tuja
-tako številu $a$ kot tudi številu $b$. 
-
-Števila v posameznem stolpcu dajejo vsa isti ostanek pri deljenju z $b$. Torej so bodisi vsa tuja številu
-$b$ bodisi mu ni tuje nobeno od njih. Stolpcev, katerih elementi so tuji številu $b$, je toliko, kot je
-takih števil v prvi vrstici tabele, teh pa je ravno $\varphi(b)$.
-
-Različna števila v posameznem stolpcu dajo različne ostanke pri deljenju z $a$. Če namreč števili
-$k_1 b + r$ in $k_2 b + r$, kjer je $0 \le k_1, k_2 \le a-1$, dasta isti ostanek pri deljenju z $a$, je njuna razlika $(k_1 - k_2) b$
-deljiva z $a$. Ker sta števili $a$ in $b$ tuji, sledi, da je z $a$ deljiva razlika $k_1 - k_2$.
-To pa je možno le, če je $k_1 = k_2$, saj je $-(a-1) \le k_1 - k_2 \le a-1$. Ker je dolžina stolpca
-enaka $a$, dobimo pri deljenju elementov stolpca z $a$ ravno vse možne ostanke $0, 1,\ldots, a-1$.
-Torej je v vsakem stolpcu $\varphi(a)$ števil tujih $a$. 
-
-To velja tudi za $\varphi(b)$ stolpcev, katerih elementi so tuji številu $b$. Potemtakem je v gornji tabeli
-$\varphi(b)\varphi(a)$ števil, ki so tuja tako številu $b$ kot tudi številu $a$. 
-Torej je $\varphi(ab) = \varphi(a)\varphi(b)$, kar pomeni, da je Eulerjeva funkcija multiplikativna. \qed
-
-
-\begin{zgled}
-Izračunajmo $\varphi(10^k)$. Ker je $10^k = 2^k 5^k$, je po izreku \ref{fimult} in trditvi \ref{fipp}
-\[
-\varphi(10^k)\ =\ \varphi(2^k)\varphi(5^k)\ =\ (2^k - 2^{k-1})(5^k - 5^{k-1})\ =\ 4\times 10^{k-1}.
-\]
-\end{zgled}
-
-
-\begin{posledica}
-\[
-\varphi(n)\ =\ n \times \prod_{p\,|\,n} \left(1 - \frac{1}{p}\right),
-\]
-\end{posledica}
-kjer $p$ preteče vse različne prafaktorje števila $n$.
-
-\noindent
-{\em Dokaz:\/} Naj bo $n = \prod_{i=1}^r p_i^{k_i}$,
-kjer so $p_1, p_2, \ldots, p_r$ različna praštevila in $k_1, k_2, \ldots, k_r \in \N$. Po izreku 
-\ref{fimult} in trditvi \ref{fipp} je potem
-\begin{eqnarray*}
-\varphi(n) &=& \prod_{i=1}^r \varphi\left(p_i^{k_i}\right)
-\ =\ \prod_{i=1}^r \left(p_i^{k_i} - p_i^{k_i-1}\right) \\
- &=& \left(\prod_{i=1}^r p_i^{k_i}\right) \times \prod_{i=1}^r \left(1 - \frac{1}{p_i}\right)
-\ =\ n \times \prod_{p\,|\,n} \left(1 - \frac{1}{p}\right). \qedm
-\end{eqnarray*}
-
-
-\begin{trditev}
-Za vse $n \in \N$ velja enačba
-\begin{equation}
-\label{fisum}
-\sum_{d\,|\,n} \varphi(d)\ =\  n,
-\end{equation}
-kjer $d$ preteče vse pozitivne delitelje števila $n$.
-\end{trditev}
-
-\noindent
-{\em Dokaz:\/} Za vse delitelje $d$ števila $n$ označimo
-\[
-A_d\ =\ \left\{\frac{k n}{d};\ k \in \Z,\ 0 \le k < d,\ D(k,d) = 1\right\}.
-\]
-Recimo, da je $k_1 n/d_1 = k_2 n/d_2$, kjer je $D(k_1,d_1) = D(k_2,d_2) = 1$. Potem 
-je $k_1 d_2 = k_2 d_1$, od koder sledi, da $d_1$ deli $d_2$ in obratno, kar pomeni,
-da je $d_1 = d_2$. Od tod zaključimo, da so si množice $A_d$ paroma tuje,
-torej je
-\[
-\left|\bigcup_{d\,|\,n} A_d\right|\ =\ \sum_{d\,|\,n} |A_d|\ =\ \sum_{d\,|\,n} \varphi(d).
-\]
-Po drugi strani pa je
-\[
-\bigcup_{d\,|\,n} A_d\ =\ \{0, 1, \ldots, n-1\}.
-\]
-Res, naj bo $k n/d \in A_d$. Ker $d$ deli $n$, je število $k n/d$ celo, iz $0 \le k < d$ pa sledi $0 \le k n/d < n$,
-torej $k n/d \in \{0, 1, \ldots, n-1\}$. Vzemimo zdaj še poljuben $j \in \{0, 1, \ldots, n-1\}$
-in označimo: $k = j/D(n,j)$, $d = n/D(n,j)$. Potem je $j = k D(n,j) = k n/d \in A_d$.
-
-To pa pomeni, da je $\left|\bigcup_{d\,|\,n} A_d\right| = n$ in izrek je dokazan. \qed
-
-\begin{izrek}[Eulerjev izrek]
-Naj bosta $n \in \N$ in $a \in \Z$ tuji števili. Potem je
-\[
-a^{\varphi(n)} \equiv 1 \pmod{n}.
-\]
-\end{izrek}
-
-\noindent
-{\em Dokaz:\/} Naj bodo $k_1, k_2, \ldots, k_{\varphi(n)}$ vsa števila med $1$ in $n$, ki so tuja $n$. Če za indeksa $i,j \in \{1,2,\ldots,\varphi(n)\}$ velja $k_i a \equiv k_j a \!\!\!\pmod{n}$, sledi $n | (k_i a - k_j a)$ in zato $n | (k_i - k_j)$, saj sta števili $n$ in $a$ tuji. To pa je mogoče le, če je $i = j$. Števila  $k_1 a, k_2 a, \ldots, k_{\varphi(n)} a$ so torej med seboj paroma nekongruentna po modulu $n$. Ker so tuja številu $n$, je množica njihovih ostankov pri deljenju z $n$ enaka množici $\{k_1, k_2, \ldots, k_{\varphi(n)}\}$. Zato je $k_1 a\cdot k_2 a\cdots k_{\varphi(n)} a \equiv k_1\cdot k_2 \cdots k_{\varphi(n)} \pmod{n}$, od tod pa po krajšanju s produktom $ k_1\cdot k_2 \cdots k_{\varphi(n)}$, ki je tuj številu $n$, dobimo $a^{\varphi(n)} \equiv 1 \!\!\!\pmod{n}$. \qed
-
-\begin{posledica}[mali Fermatov izrek]
-Naj bo $p$ praštevilo in $a \in \Z$ celo število, ki ni deljivo s $p$. Potem je
-\[
-a^{p-1} \equiv 1 \pmod{p}.
-\]
-\end{posledica}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\section{M\"obiusova funkcija}
-
-
-\begin{definicija}
-Za vse $n \in \N$ naj bo
-\[
-\mu(n)\ =\ \left\{
-\begin{array}{cl}
-0, & \mbox{če\ } n \mbox{\ deljiv s kvadratom praštevila,} \\
-(-1)^r, & \mbox{sicer,}
-\end{array}
-\right.
-\]
-kjer je $r$ število različnih prafaktorjev števila $n$.
-Preslikavo $\mu: \N \to \Z$ imenujemo \em{M\"obiusova funkcija}.
-\end{definicija}
-
-\begin{zgled}
-Tabela \ref{mi} prikazuje prvih nekaj vrednosti funkcije $\mu(n)$. 
-\begin{table}[h]
-\[
-\begin{array}{c|*{10}{r}}
-   n   & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
-\hline
-\mu(n) & \ \ 1 & -1 & -1 & \ \ 0 & -1 & \ \ 1 & -1 & \ \ 0 & \ \ 0 & \ \ 1
-\end{array}
-\]
-\caption{Vrednosti funkcije $\mu(n)$}\label{mi}
-\end{table}
-\end{zgled}
-
-
-\begin{izrek}
-\label{mimult}
-M\"obiusova funkcija je multiplikativna.
-\end{izrek}
-
-\noindent
-{\em Dokaz:\/} Vzemimo tuji naravni števili $a$ in $b$. Če je število $ab$ deljivo s kvadratom praštevila,
-velja to tudi za $a$ ali za $b$. V tem primeru je torej $\mu(ab) = 0 = \mu(a)\mu(b)$.
-Če pa število $ab$ ni deljivo s kvadratom praštevila, velja to tudi za $a$ in za $b$. Naj bo $r$ število različnih
-prafaktorjev števila $a$, $s$ pa število različnih prafaktorjev števila $b$. Potem je število različnih 
-prafaktorjev števila $ab$ enako $r+s$, torej je v tem primeru $\mu(ab) = (-1)^{r+s} = (-1)^r (-1)^s = \mu(a)\mu(b)$.
-\qed
-
-
-\begin{trditev}
-Za vse $n \in \N$ velja enačba
-\begin{equation}
-\label{mirek}
-\sum_{d\,|\,n} \mu(d)\ =\ \left\{
-\begin{array}{ll}
-1, & n = 1, \\
-0, & n > 1,
-\end{array}
-\right.
-\end{equation}
-kjer $d$ preteče vse pozitivne delitelje števila $n$.
-\end{trditev}
-
-\noindent
-{\em Dokaz:\/} 
-Zadošča seštevati po tistih deliteljih $d$ števila $n$, ki imajo same različne prafaktorje (sicer je
-$\mu(d) = 0$). Imenujmo takšne delitelje {\em enostavni}. Naj bo $r$ število različnih prafaktorjev
-števila $n$. Število enostavnih deliteljev števila $n$, ki imajo natanko $k$ prafaktorjev, je potem ${r \choose k}$,
-prispevek takega delitelja h gornji vsoti pa znaša $\mu(d) = (-1)^k$. Torej je
-\[
-\sum_{d\,|\,n} \mu(d)\ =\ 
-\sum_{k=0}^r (-1)^k {r \choose k} \ =\ 
-\left\{
-\begin{array}{ll}
-1, & r = 0, \\
-0, & r > 0
-\end{array}
-\right.\ =\ \left\{
-\begin{array}{ll}
-1, & n = 1, \\
-0, & n > 1.
-\end{array}
-\right. \qedm
-\]
-
-\begin{opomba}
-Enačbo (\ref{mirek}) bi lahko uporabili tudi za (rekurzivno) definicijo funkcije $\mu(n)$:
-\[
-\mu(n)\ =\ \left\{
-\begin{array}{cl}
-1, & n = 1, \\
--\displaystyle\sum_{d\,|\,n, \,d < n} \mu(d), & n > 1.
-\end{array}
-\right.
-\]
+\begin{opomba} 
+Naj bosta $p,q \in \Qe$. Vemo, da produkt kvaternionov ni komutativen, t. j. $p q \neq q p$. Če p in q zapišemo v polarni obliki, 
+$p = e^{u\theta}, q = e^{v\varphi}$, lahko produkta napišemo kot
+\begin{center}
+   $p q = e^{u\theta} e^{v\varphi}$ in $q p = e^{v\varphi}e^{u\theta}$.
+\end{center}
+Zaradi nekomutativnosti prav tako sledi da $e^{u\theta} e^{v\varphi} \neq e^{v\varphi}e^{u\theta}$. Če bi tak produkt obstajal, bi v eksponentu imeli primer nekomutativne vsote,
+kar pa je seveda v protislovju z definicijo vsote iz algebre $\H$.
 \end{opomba}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-M\"obiusova funkcija igra pomembno vlogo pri {\em M\"obiusovem obratu}, ki nam omogoča
-izraziti aritmetično funkcijo $f(n)$, če poznamo funkcijo $g(n) = \sum_{d\,|\,n} f(d)$,
-kjer $d$ preteče vse pozitivne delitelje števila $n$.
+Zanima nas, kdaj taki kvaternioni komutirajo.
+\begin{trditev}
+Naj bosta $p,q \in \Qe$ taka, da $\exists u \in \Ue$, da $p = e^{u\theta}$ in $q = e^{u\varphi}$ za neka $\theta, \varphi \in \R$.
+Tedaj je $pq = qp$.
+\end{trditev}
+\noindent
+{\em Dokaz:\/} Zapišemo $p = \cos\theta + u\sin\theta$, $q = \cos\varphi + u\sin\varphi$.
+Spomnimo se, da skalarji komutirajo z vsemi kvaternioni. Torej je
+\begin{align*}
+   pq & = (\cos\theta + u\sin\theta)(\cos\varphi + u\sin\varphi)\\
+   & = \cos\theta(\cos\varphi + u\sin\varphi) + u\sin\theta(\cos\varphi + u\sin\varphi)\\
+   & = (\cos\varphi + u\sin\varphi)\cos\theta + (u\cos\varphi + u^2\sin\varphi)\sin\theta\\
+   & = (\cos\varphi + u\sin\varphi)\cos\theta + (\cos\varphi + u\sin\varphi)u\sin\theta\\
+   & = (\cos\varphi + u\sin\varphi)(\cos\theta + u\sin\theta) = qp.
+\end{align*}
+\qed
 
-\begin{izrek} \em{(M\"obiusov obrat)} \ 
-Za aritmetični funkciji $f, g$ velja:
-\[
-g(n)\ =\ \sum_{d\,|\,n} f(d)\quad \Longleftrightarrow\quad f(n)\ =\ \sum_{d\,|\,n} \mu\left(\frac{n}{d}\right)g(d)
-\]
+Trditev nam pove, da kvaternioni z različnim realnim argumentom in istim versorjem med sabo komutirajo. Lahko torej zapišemo, da 
+\begin{center}
+   $p,q \in \H. pq = qp \iff U_{p} = U_{q}.$
+\end{center}
+Prav tako komutirata kvaterniona, ki sta zapisana s konjugiranima versorjema, saj je to ekvivalentno negativnemu argumentu v polarnem zapisu.
+
+\section{Preslikava rotacije}
+\subsection{Preslikava}
+\begin{definicija}
+Naj bo $q \in \Qe$. Označimo preslikavi $L_{q}, R_{q} : \H \to \H$ levega in desnega množenja:
+\begin{center}
+   $L_{q}x = qx$, $R_{q}x = xq$.
+\end{center}
+\end{definicija}
+
+Vidimo, da sta $L_{q}$ in $R_{q}$ linearni preslikavi. Naj bosta $x,y \in \H$ in $\alpha, \beta \in \R$.
+\begin{center}
+   $L_{q}(\alpha x +\beta y) = q(\alpha x +\beta y)$.
+\end{center}
+Uporabimo komutativnost skalarjev in levo distributivnost nad kvaternioni:
+\begin{center}
+   $q(\alpha x +\beta y) = \alpha qx + \beta qy = \alpha L_{q}x + \beta L_{q}y$.
+\end{center}
+S podobnim računom pokažemo, da je $R_{q}$ tudi linearna. Poleg tega vidimo, da sta preslikavi ortogonalni,
+t.j., da ohranjata skalarni produkt. Iz tega sledi tudi, da sta preslikavi $L_{q}$ in $R_{q}$ izometriji prostora.
+Ti preslikavi med sabo komutirata, saj za $p,q \in \Qe$ in fiksen $x \in \H$:
+\begin{center}
+   $(L_{p} \circ R_{q})x = p(xq) = (px)q = (R_{q} \circ L_{p})x$.
+\end{center}
+Njun kompozitum je prav tako ortogonalna preslikava
+Definiramo torej kompozitum preslikav kot posebno preslikavo
+\begin{definicija}
+Naj bosta $p,q \in \Qe$. S $C: \H \to \H$ označimo kompozitum levega in desnega množenja
+\begin{center}
+   $C_{p,q} = L_{p} \circ R_{q} = R_{q} \circ L_{p}$.
+\end{center}
+\end{definicija}
+C je za poljubna $p,q \in \Qe$ bijektivna in ortogonarlna. Ortogonalnost sledi iz kompozicije dveh ortogonalnih preslikac,
+surjektivnost je očitna. Injektivnost preverimo z uporabo pravil krajšanja v kvaternionski algebri $\H$.
+Če je namreč $C_{p,q}x = C_{p,q}y$, je to enako $pxq = pyq$. Ker lahko kvaternione okrajšamo, sledi $x = y$.
+
+Naj bodo $p_1, q_1, p_2, q_2 \in \Qe$. Označimo preslikavi $C_{p_1, q_1}, C_{p_2,q_2}$. Če preslikavi komponiramo, je rezultat ponovno preslikava take oblike, t.j.
+$C_{p_1 p_2, q_2 q_1}$. Inverz te preslikave je prav tako ortogonalna preslikava, namreč $C^{-1}_{p,q} = C_{p^{-1}, q^{-1}}.$ 
+Imamo torej grupo preslikav za komponiranje nad $\Qe$.
+Opomnimo samo, da se pri komponiranju teh preslikav vrstni red desnega množenja obrne.
+
+Posebej omenimo množico preslikav oblike $C_{q,\conj{q}}$. Vemo, da se da $q$ zapisati v polarni obliki kot
+$\cos\theta + u\sin\theta = e^{u\theta}$ za neka $u \in \Ue, \theta \in \R$. Ker je $q \in \Qe$, je $\conj{q} = e^{-u\theta}$.
+Preslikavo $C_{q, \conj{q}}$ je torej možno zapisati kot
+\begin{center}
+   $Cx := C_{q, \conj{q}} x = e^{u\theta}x e^{-u\theta}$.
+\end{center}
+Ker je $C$ ortogonalna preslikava, ohranja skalarni produkt. Spomnimo se, da so skalarni kvaternioni in čisti kvaternioni pravokotni,
+saj ce $\alpha \in \R$ in $q \in \H - \R$, je $\langle \alpha, q\rangle = \frac{1}{2} (\conj{\alpha}q + \conj{q}\alpha)$. Ker je $\alpha \in \R$, je $\conj{\alpha} = \alpha$.
+Torej je dalje skalarni produkt enak $\frac{1}{2}(\alpha q - \alpha q) = 0$. Prostor skalarjev je torej invarianten za preslikavo $C$.
+Od tu naprej označujemo prostor čistih kvaternionov z $\H - \R = \mathbb{E}^3$.
+
+\begin{izrek}
+Naj bo $u \in \Ue$ in $\theta \in \R$. Preslikava $C = C_{q, \conj{q}}$ je rotacija ravnine, 
+pravokotne na $u$ za kot $2\theta$.
 \end{izrek}
 
 \noindent
-{\em Dokaz:\/} 
-Najprej vzemimo, da je $g(n) = \sum_{d\,|\,n} f(d)$ za vse $n \in \N$. Potem je
-\begin{eqnarray*}
-\sum_{d\,|\,n} \mu\left(\frac{n}{d}\right)g(d)
- &=& \sum_{d\,|\,n} \mu\left(\frac{n}{d}\right)\sum_{k\,|\,d} f(k)
-\ =\ \sum_{k\,|\,n} f(k) \sum_{k\,|\,d\,|\,n} \mu\left(\frac{n}{d}\right) \\
- &=& \sum_{k\,|\,n} f(k) \sum_{a\,|\,(n/k)} \mu\left(a\right)\ =\ f(n).
- \end{eqnarray*}
-Drugo enakost smo dobili z zamenjavo vrstnega reda seštevanja, tretjo z uvedbo nove spremenljivke $a = n/d$,
-četrta pa sledi iz (\ref{mirek}).
+{\em Dokaz:\/} Najprej pogledamo, kaj se zgodi z kvaternioni, ki ležijo na ogrinjači versorja $u$.
+Naj bo $u \in \Ue$.
+\begin{center}
+   $C_{q,\conj{q}}u = e^{u\theta} u e^{-u\theta}$.
+\end{center}
+Ker je hkrati tudi $u \in \Qe$, se $u$ da zapisati kot $\cos\frac{\pi}{2} + u\sin\frac{\pi}{2} = e^{u\frac{\pi}{2}}$.
+Spomnimo se, da kvaternioni, izraženi z istim versorjem, med sabo komutirajo. Torej je
+\begin{center}
+   $e^{u\theta} u e^{-u\theta} = e^{u\theta}e^{-u\theta}u = u$.
+\end{center}
+Vidimo torej, da je tudi $Lin\{u\}$ invariantna. Preslikava $C$ torej fiksira dve dimenziji prostora $\H$.
+Ker je preslikava $C$ ortogonalna, ohranja tudi ortogonalni komplement $Lin\{u\}$.
+Označimo $L^{\bot} = (Lin\{u\})^{\bot}$. Naj bo $v \in L^{\bot}$. Za bazo ravnine, pravokotne na $u$, vzamemo kvaterniona $v$ in $w = uv = u \times w$.
+Za $v$ velja naslednje:
+\begin{align*}
+   v e^{-u\theta} & = v(\cos\theta -u\sin\theta) \\
+   & = v\cos\theta -vu \sin\theta \\
+   & = v\cos\theta + uv\sin\theta \\
+   & = (\cos\theta +u\sin\theta)v = e^{u\theta}v.
+\end{align*}
+Torej če s $C$ slikamo $v$:
+\begin{center}
+   $C(v) = e^{u\theta}v e^{-u\theta} = e^{u\theta}e^{u\theta}v = e^{2u\theta}$.
+\end{center}
+Če $e^{2u\theta}v$ zapišemo kot $v\cos2\theta + uv\sin2\theta = v\cos2\theta + w\sin2\theta$, vidimo podobno, kot bi imeli rotacijo $\R^2$. Prav tako s $C$ preslikamo $w$:
+\begin{center}
+   $C(w) = e^{u\theta}w e^{-u\theta} = e^{u\theta}uve^{-u\theta} = e^{u\theta}ue^{u\theta}v = e^{u\theta}e^{u\theta}uv = e^{2u\theta}w$.
+\end{center}
+Žapišemo še $w$ kot $w\cos2\theta + wu\sin2\theta = w\cos2\theta - v\sin2\theta$.
 
-Vzemimo zdaj, da je $f(n)\ =\ \sum_{d\,|\,n} \mu\left(\frac{n}{d}\right)g(d)$ za vse $n \in \N$. Potem je
-\begin{eqnarray*}
-\sum_{d\,|\,n} f(d)
- &=& \sum_{d\,|\,n} \sum_{k\,|\,d} \mu\left(\frac{d}{k}\right) g(k)
-\ =\ \sum_{k\,|\,n} g(k) \sum_{k\,|\,d\,|\,n} \mu\left(\frac{d}{k}\right) \\
- &=& \sum_{k\,|\,n} g(k) \sum_{b\,|\,(n/k)} \mu\left(b\right)\ =\ g(n).
- \end{eqnarray*}
-Drugo enakost smo dobili z zamenjavo vrstnega reda seštevanja, tretjo z uvedbo nove spremenljivke $b = d/k$,
-četrta pa sledi iz (\ref{mirek}). \qed
+\break
+Ker je $H$ algebra, je obenem tudi vektorski prostor. Zato je smiselno napisati matriko preslikave $C$ glede na bazo $\{v, w\}$.
+$C$ tedaj ustreza matriki
+\begin{center}
+   $
+   \begin{bmatrix}
+      \cos2\theta & -\sin2\theta \\
+      \sin2\theta & \cos2\theta
+   \end{bmatrix}
+   $
+\end{center}
+Preslikava C torej predstavlja transformacijo $\H$, ki fiksira skalarje $\R$ in eno dimenzijo prostora $\mathbb{E}^3$, ki sovpada z $u$, drugi dve pa obrne.
 
+\qed
 
-\begin{zgled}
-\label{tau}
-\begin{itemize}
-\item Iz enačbe (\ref{fisum}) sledi z M\"obiusovim obratom, da je 
-\[
-\varphi(n)\ =\ \sum_{d\,|\,n}\mu\left(\frac{n}{d}\right)d.
-\]
-\item Za vse $n \in \N$ s $\tau(n)$ označimo število vseh pozitivnih deliteljev števila $n$.
-Torej je $\tau(n) = \sum_{d\,|\,n} 1$, od koder sledi z M\"obiusovim obratom, da je 
-\[
-\sum_{d\,|\,n}\mu\left(\frac{n}{d}\right)\tau(d)\ =\ 1.
-\]
-\item Za vse $n \in \N$ s $\sigma(n)$ označimo vsoto vseh pozitivnih deliteljev števila $n$.
-Torej je $\sigma(n) = \sum_{d\,|\,n} d$, od koder sledi z M\"obiusovim obratom, da je 
-\[
-\sum_{d\,|\,n}\mu\left(\frac{n}{d}\right)\sigma(d)\ =\ n.
-\]
-\end{itemize}
-\end{zgled}
+Omenimo še, da $C$ ohranja orientacijo, saj je ortogonalna preslikava. $C$ torej zarotira ravnino v pozitivni smeri.
 
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\section{Kolobar aritmetičnih funkcij}
-
-\begin{definicija}
-Za aritmetični funkciji $f, g: \N \to \C$ in za vse $n \in \N$ naj bo 
-\[
-(f * g)(n) \ =\ \sum_{d\,|\,n} f(d)g\left(\frac{n}{d}\right).
-\]
-Aritmetična funkcija $f * g$ je {\em Dirichletova konvolucija\/} funkcij $f$ in $g$.
-\end{definicija}
-
-\begin{trditev}
-\label{kolo}
-Naj bodo $f$, $g$, $h$ aritmetične funkcije. Potem velja:
-\begin{itemize}
-\item[\rm (i)] $f * g \ =\ g * f$,
-\item[\rm (ii)] $(f * g) * h \ =\ f * (g * h)$,
-\item[\rm (iii)] $f * (g + h) \ =\ f * g + f * h$.
-\end{itemize}
-\end{trditev}
-
-\noindent
-{\em Dokaz:\/} 
-\begin{itemize}
-\item[\rm (i)] 
-Trditev sledi iz zapisa Dirichletove konvolucije v simetrični obliki
-\begin{equation}
-\label{dk}
-(f * g)(n) \ =\ \sum_{d e = n} f(d)g(e),
-\end{equation}
-kjer seštevamo po vseh urejenih parih naravnih števil $(d,e)$, katerih produkt je enak $n$.
-
-\item[\rm (ii)] 
-Z uporabo enačbe (\ref{dk}) izračunamo
-\begin{eqnarray*}
-((f * g) * h)(n) &=& \sum_{d e = n} (f * g)(d)h(e)
-\ =\ \sum_{d e = n} \left(\sum_{a b = d} f(a)g(b)\right)h(e) \\
- &=& \sum_{a b e = n} f(a)g(b)h(e)
- \ =\ \sum_{a c = n} f(a) \sum_{b e = c} g(b)h(e) \\
- &=& \sum_{a c = n} f(a) (g * h)(c)
- \ =\ (f * (g * h))(n).
-\end{eqnarray*}
-Četrto enakost smo dobili z uvedbo nove spremenljivke $c = b e$.
+\subsection{Izbira smeri in baze}
+\section{Vektorsko polje nad $\H$}
+\subsection*{Motivacija}
+\subsection{Vpeljava vektorskega polja s preslikavo $C$}
 
 
-\item[\rm (iii)]
-Z uporabo enačbe (\ref{dk}) izračunamo
-\begin{eqnarray*}
-(f * (g + h))(n) &=& \sum_{d e = n} f(d)(g+h)(e)
-\ =\ \sum_{d e = n} f(d)(g(e)+h(e)) \\
- &=& \sum_{d e = n} f(d)g(e) + \sum_{d e = n} f(d)h(e) \\
- &=& (f * g + f * h)(n). \qedm
-\end{eqnarray*}
 
-\end{itemize}
+% \section{Eulerjeva funkcija}
 
-Iz trditve \ref{kolo} sledi, da je množica vseh aritmetičnih funkcij $f: \N \to \C$ z operacijama $+$ in $*$ komutativen kolobar. Imenujemo ga {\em Dirichletov kolobar} in označimo z $\cal D$. 
 
-Funkcija $\varepsilon \in {\cal D}$, ki za vse $n \in \N$ zadošča enačbi
-\[
-\varepsilon(n)\ =\ \left\{
-\begin{array}{ll}
-1, & n = 1, \\
-0, & n > 1,
-\end{array}
-\right.
-\]
-je enica kolobarja $\cal D$, saj za vse $f \in {\cal D}$ in $n \in \N$ velja
-\[
-(f * \varepsilon)(n) \ =\ \sum_{d e = n} f(d)\varepsilon(e) \ =\ f(n)\varepsilon(1) \ =\ f(n).
-\]
-Brez težav se lahko prepričamo tudi, da je $\cal D$ cel kolobar in da je funkcija $f \in {\cal D}$
-obrnljiva natanko tedaj, ko $f(1) \ne 0$.
+% \begin{definicija}
+% Za vse $n \in \N$ s $\varphi(n)$ označimo število 
+% celih števil iz množice $\{1, 2, \ldots, n\}$, ki so tuja številu $n$.
+% Preslikavo $\varphi: \N \to \N$ imenujemo \em{Eulerjeva funkcija}.
+% \end{definicija}
 
-Zdaj lahko enačbo (\ref{mirek}) prepišemo v obliki
-\[
-\mu * \mathbf{1}\ = \ \varepsilon,
-\]
-kjer $\mathbf{1}$ označuje konstantno funkcijo z vrednostjo $1$. Z drugimi besedami, M\"obiusova funkcija
-je inverz konstantne funkcije $\mathbf{1}$ glede na Dirichletovo konvolucijo:
-\[
-\mu \ =\  \mathbf{1}^{-1}.
-\]
-M\"obiusov obrat lahko torej zapišemo v obliki
-\[
-g\ =\ f * \mathbf{1} \quad \Longleftrightarrow \quad f\ =\ g * \mu,
-\]
-kjer njegova veljavnost postane očitna. Zgled \ref{tau} pa lahko prepišemo v obliki
-\begin{eqnarray*}
-\varphi * \mathbf{1} \ =\ {\rm id}_\N &\Longrightarrow& \varphi\ =\ \mu * {\rm id}_\N, \\
-\tau \ =\ \mathbf{1} * \mathbf{1} &\Longrightarrow& \mu * \tau \ =\ \mathbf{1}, \\
-\sigma \ =\ {\rm id}_\N * \mathbf{1} &\Longrightarrow& \mu * \sigma \ =\ {\rm id}_\N.
-\end{eqnarray*}
+% \begin{zgled}
+% Tabela \ref{fi} prikazuje izračun prvih šest vrednosti funkcije $\varphi(n)$. V $n$-ti vrstici so 
+% krepko natisnjena števila med $1$ in $n$, ki so tuja številu $n$. Slika~\ref{fi100} pa grafično prikazuje prvih 100 vrednosti funkcije $\varphi(n)$.
+% \begin{table}[h]
+% \[
+% \begin{array}{clc}
+%  n & \{1,2,\ldots, n\}          & \varphi(n)       \\
+%  \hline
+%  1 & \{{\bf 1}\}                    &     1      \\
+%  2 & \{{\bf 1},2 \}                &     1      \\
+%  3 & \{{\bf 1,2},3 \}             &     2      \\
+%  4 & \{{\bf 1},2,{\bf 3},4 \} &     2      \\
+%  5 & \{{\bf 1,2,3,4},5 \}       &     4      \\
+%  6 & \{{\bf 1},2,3,4,{\bf 5},6 \} &     2
+% \end{array}
+% \] 
+% \caption{Vrednosti funkcije $\varphi(n)$ za $n = 1,2,\ldots,6$}\label{fi}
+% \end{table}
+
+% \begin{figure}[h]
+% % \includegraphics{fi100.pdf}
+% \caption{Vrednosti funkcije $\varphi(n)$ za $n = 1,2,\ldots,100$}\label{fi100}
+% \end{figure}
+% \end{zgled}
+
+% Računanje $\varphi(n)$ po definiciji je pri velikem $n$ zelo zamudno. Vendar ima 
+% Eulerjeva funkcija lepe lastnosti, zaradi katerih lahko njeno vrednost izračunamo
+% tudi pri velikem argumentu, če ga le znamo razcepiti na prafaktorje.
+
+% Če je $p$ praštevilo, med števili $1,2,\ldots, p$ edinole število $p$ ni tuje številu $p$,
+% torej je $\varphi(p) = p-1$. Skoraj prav tako preprosto lahko poiščemo vrednost $\varphi(n)$,
+% če je $n$ potenca nekega praštevila.
+
+% \begin{trditev}
+% \label{fipp}
+% Naj bo $p$ praštevilo in $k \in \N$. Potem je $\varphi(p^k) = p^k-p^{k-1}$.
+% \end{trditev}
+
+% \noindent
+% {\em Dokaz:\/} Število $a$ je tuje številu $p^k$ natanko tedaj, ko ni večkratnik praštevila $p$.
+% Med števili $1,2,\ldots, p^k$ je natanko $p^k/p = p^{k-1}$ večkratnikov števila $p$, torej je $\varphi(p^k) = p^k-p^{k-1}$. 
+% \qed
+
+% \begin{izrek}
+% \label{fimult}
+% Eulerjeva funkcija je multiplikativna.
+% \end{izrek}
+
+% \noindent
+% {\em Dokaz:\/} Vzemimo tuji naravni števili $a$ in $b$. Zapišimo vsa števila med $1$ in $ab$
+% v obliki tabele z $a$ vrsticami in $b$ stolpci:
+% \[
+% \begin{array}{cccc}
+% 1 & 2 & \cdots & \ b \\
+% b+1 & b+2 & \cdots & \ 2b \\
+% 2b+1 & 2b+2 & \cdots & \ 3b \\
+% \vdots & \vdots & \cdots & \ \vdots \\
+% (a-1)b+1 & (a-1)b+2 & \cdots & \ ab 
+% \end{array}
+% \]
+% Za vsako število velja, da je tuje številu $ab$ natanko tedaj, ko je tuje številu $a$ in tuje številu $b$.
+% Vrednost $\varphi(ab)$ lahko torej dobimo tako, da preštejemo, koliko je v gornji tabeli števil, ki so tuja
+% tako številu $a$ kot tudi številu $b$. 
+
+% Števila v posameznem stolpcu dajejo vsa isti ostanek pri deljenju z $b$. Torej so bodisi vsa tuja številu
+% $b$ bodisi mu ni tuje nobeno od njih. Stolpcev, katerih elementi so tuji številu $b$, je toliko, kot je
+% takih števil v prvi vrstici tabele, teh pa je ravno $\varphi(b)$.
+
+% Različna števila v posameznem stolpcu dajo različne ostanke pri deljenju z $a$. Če namreč števili
+% $k_1 b + r$ in $k_2 b + r$, kjer je $0 \le k_1, k_2 \le a-1$, dasta isti ostanek pri deljenju z $a$, je njuna razlika $(k_1 - k_2) b$
+% deljiva z $a$. Ker sta števili $a$ in $b$ tuji, sledi, da je z $a$ deljiva razlika $k_1 - k_2$.
+% To pa je možno le, če je $k_1 = k_2$, saj je $-(a-1) \le k_1 - k_2 \le a-1$. Ker je dolžina stolpca
+% enaka $a$, dobimo pri deljenju elementov stolpca z $a$ ravno vse možne ostanke $0, 1,\ldots, a-1$.
+% Torej je v vsakem stolpcu $\varphi(a)$ števil tujih $a$. 
+
+% To velja tudi za $\varphi(b)$ stolpcev, katerih elementi so tuji številu $b$. Potemtakem je v gornji tabeli
+% $\varphi(b)\varphi(a)$ števil, ki so tuja tako številu $b$ kot tudi številu $a$. 
+% Torej je $\varphi(ab) = \varphi(a)\varphi(b)$, kar pomeni, da je Eulerjeva funkcija multiplikativna. \qed
+
+
+% \begin{zgled}
+% Izračunajmo $\varphi(10^k)$. Ker je $10^k = 2^k 5^k$, je po izreku \ref{fimult} in trditvi \ref{fipp}
+% \[
+% \varphi(10^k)\ =\ \varphi(2^k)\varphi(5^k)\ =\ (2^k - 2^{k-1})(5^k - 5^{k-1})\ =\ 4\times 10^{k-1}.
+% \]
+% \end{zgled}
+
+
+% \begin{posledica}
+% \[
+% \varphi(n)\ =\ n \times \prod_{p\,|\,n} \left(1 - \frac{1}{p}\right),
+% \]
+% \end{posledica}
+% kjer $p$ preteče vse različne prafaktorje števila $n$.
+
+% \noindent
+% {\em Dokaz:\/} Naj bo $n = \prod_{i=1}^r p_i^{k_i}$,
+% kjer so $p_1, p_2, \ldots, p_r$ različna praštevila in $k_1, k_2, \ldots, k_r \in \N$. Po izreku 
+% \ref{fimult} in trditvi \ref{fipp} je potem
+% \begin{eqnarray*}
+% \varphi(n) &=& \prod_{i=1}^r \varphi\left(p_i^{k_i}\right)
+% \ =\ \prod_{i=1}^r \left(p_i^{k_i} - p_i^{k_i-1}\right) \\
+%  &=& \left(\prod_{i=1}^r p_i^{k_i}\right) \times \prod_{i=1}^r \left(1 - \frac{1}{p_i}\right)
+% \ =\ n \times \prod_{p\,|\,n} \left(1 - \frac{1}{p}\right). \qedm
+% \end{eqnarray*}
+
+
+% \begin{trditev}
+% Za vse $n \in \N$ velja enačba
+% \begin{equation}
+% \label{fisum}
+% \sum_{d\,|\,n} \varphi(d)\ =\  n,
+% \end{equation}
+% kjer $d$ preteče vse pozitivne delitelje števila $n$.
+% \end{trditev}
+
+% \noindent
+% {\em Dokaz:\/} Za vse delitelje $d$ števila $n$ označimo
+% \[
+% A_d\ =\ \left\{\frac{k n}{d};\ k \in \Z,\ 0 \le k < d,\ D(k,d) = 1\right\}.
+% \]
+% Recimo, da je $k_1 n/d_1 = k_2 n/d_2$, kjer je $D(k_1,d_1) = D(k_2,d_2) = 1$. Potem 
+% je $k_1 d_2 = k_2 d_1$, od koder sledi, da $d_1$ deli $d_2$ in obratno, kar pomeni,
+% da je $d_1 = d_2$. Od tod zaključimo, da so si množice $A_d$ paroma tuje,
+% torej je
+% \[
+% \left|\bigcup_{d\,|\,n} A_d\right|\ =\ \sum_{d\,|\,n} |A_d|\ =\ \sum_{d\,|\,n} \varphi(d).
+% \]
+% Po drugi strani pa je
+% \[
+% \bigcup_{d\,|\,n} A_d\ =\ \{0, 1, \ldots, n-1\}.
+% \]
+% Res, naj bo $k n/d \in A_d$. Ker $d$ deli $n$, je število $k n/d$ celo, iz $0 \le k < d$ pa sledi $0 \le k n/d < n$,
+% torej $k n/d \in \{0, 1, \ldots, n-1\}$. Vzemimo zdaj še poljuben $j \in \{0, 1, \ldots, n-1\}$
+% in označimo: $k = j/D(n,j)$, $d = n/D(n,j)$. Potem je $j = k D(n,j) = k n/d \in A_d$.
+
+% To pa pomeni, da je $\left|\bigcup_{d\,|\,n} A_d\right| = n$ in izrek je dokazan. \qed
+
+% \begin{izrek}[Eulerjev izrek]
+% Naj bosta $n \in \N$ in $a \in \Z$ tuji števili. Potem je
+% \[
+% a^{\varphi(n)} \equiv 1 \pmod{n}.
+% \]
+% \end{izrek}
+
+% \noindent
+% {\em Dokaz:\/} Naj bodo $k_1, k_2, \ldots, k_{\varphi(n)}$ vsa števila med $1$ in $n$, ki so tuja $n$. Če za indeksa $i,j \in \{1,2,\ldots,\varphi(n)\}$ velja $k_i a \equiv k_j a \!\!\!\pmod{n}$, sledi $n | (k_i a - k_j a)$ in zato $n | (k_i - k_j)$, saj sta števili $n$ in $a$ tuji. To pa je mogoče le, če je $i = j$. Števila  $k_1 a, k_2 a, \ldots, k_{\varphi(n)} a$ so torej med seboj paroma nekongruentna po modulu $n$. Ker so tuja številu $n$, je množica njihovih ostankov pri deljenju z $n$ enaka množici $\{k_1, k_2, \ldots, k_{\varphi(n)}\}$. Zato je $k_1 a\cdot k_2 a\cdots k_{\varphi(n)} a \equiv k_1\cdot k_2 \cdots k_{\varphi(n)} \pmod{n}$, od tod pa po krajšanju s produktom $ k_1\cdot k_2 \cdots k_{\varphi(n)}$, ki je tuj številu $n$, dobimo $a^{\varphi(n)} \equiv 1 \!\!\!\pmod{n}$. \qed
+
+% \begin{posledica}[mali Fermatov izrek]
+% Naj bo $p$ praštevilo in $a \in \Z$ celo število, ki ni deljivo s $p$. Potem je
+% \[
+% a^{p-1} \equiv 1 \pmod{p}.
+% \]
+% \end{posledica}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% \section{M\"obiusova funkcija}
+
+
+% \begin{definicija}
+% Za vse $n \in \N$ naj bo
+% \[
+% \mu(n)\ =\ \left\{
+% \begin{array}{cl}
+% 0, & \mbox{če\ } n \mbox{\ deljiv s kvadratom praštevila,} \\
+% (-1)^r, & \mbox{sicer,}
+% \end{array}
+% \right.
+% \]
+% kjer je $r$ število različnih prafaktorjev števila $n$.
+% Preslikavo $\mu: \N \to \Z$ imenujemo \em{M\"obiusova funkcija}.
+% \end{definicija}
+
+% \begin{zgled}
+% Tabela \ref{mi} prikazuje prvih nekaj vrednosti funkcije $\mu(n)$. 
+% \begin{table}[h]
+% \[
+% \begin{array}{c|*{10}{r}}
+%    n   & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+% \hline
+% \mu(n) & \ \ 1 & -1 & -1 & \ \ 0 & -1 & \ \ 1 & -1 & \ \ 0 & \ \ 0 & \ \ 1
+% \end{array}
+% \]
+% \caption{Vrednosti funkcije $\mu(n)$}\label{mi}
+% \end{table}
+% \end{zgled}
+
+
+% \begin{izrek}
+% \label{mimult}
+% M\"obiusova funkcija je multiplikativna.
+% \end{izrek}
+
+% \noindent
+% {\em Dokaz:\/} Vzemimo tuji naravni števili $a$ in $b$. Če je število $ab$ deljivo s kvadratom praštevila,
+% velja to tudi za $a$ ali za $b$. V tem primeru je torej $\mu(ab) = 0 = \mu(a)\mu(b)$.
+% Če pa število $ab$ ni deljivo s kvadratom praštevila, velja to tudi za $a$ in za $b$. Naj bo $r$ število različnih
+% prafaktorjev števila $a$, $s$ pa število različnih prafaktorjev števila $b$. Potem je število različnih 
+% prafaktorjev števila $ab$ enako $r+s$, torej je v tem primeru $\mu(ab) = (-1)^{r+s} = (-1)^r (-1)^s = \mu(a)\mu(b)$.
+% \qed
+
+
+% \begin{trditev}
+% Za vse $n \in \N$ velja enačba
+% \begin{equation}
+% \label{mirek}
+% \sum_{d\,|\,n} \mu(d)\ =\ \left\{
+% \begin{array}{ll}
+% 1, & n = 1, \\
+% 0, & n > 1,
+% \end{array}
+% \right.
+% \end{equation}
+% kjer $d$ preteče vse pozitivne delitelje števila $n$.
+% \end{trditev}
+
+% \noindent
+% {\em Dokaz:\/} 
+% Zadošča seštevati po tistih deliteljih $d$ števila $n$, ki imajo same različne prafaktorje (sicer je
+% $\mu(d) = 0$). Imenujmo takšne delitelje {\em enostavni}. Naj bo $r$ število različnih prafaktorjev
+% števila $n$. Število enostavnih deliteljev števila $n$, ki imajo natanko $k$ prafaktorjev, je potem ${r \choose k}$,
+% prispevek takega delitelja h gornji vsoti pa znaša $\mu(d) = (-1)^k$. Torej je
+% \[
+% \sum_{d\,|\,n} \mu(d)\ =\ 
+% \sum_{k=0}^r (-1)^k {r \choose k} \ =\ 
+% \left\{
+% \begin{array}{ll}
+% 1, & r = 0, \\
+% 0, & r > 0
+% \end{array}
+% \right.\ =\ \left\{
+% \begin{array}{ll}
+% 1, & n = 1, \\
+% 0, & n > 1.
+% \end{array}
+% \right. \qedm
+% \]
+
+% \begin{opomba}
+% Enačbo (\ref{mirek}) bi lahko uporabili tudi za (rekurzivno) definicijo funkcije $\mu(n)$:
+% \[
+% \mu(n)\ =\ \left\{
+% \begin{array}{cl}
+% 1, & n = 1, \\
+% -\displaystyle\sum_{d\,|\,n, \,d < n} \mu(d), & n > 1.
+% \end{array}
+% \right.
+% \]
+% \end{opomba}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% M\"obiusova funkcija igra pomembno vlogo pri {\em M\"obiusovem obratu}, ki nam omogoča
+% izraziti aritmetično funkcijo $f(n)$, če poznamo funkcijo $g(n) = \sum_{d\,|\,n} f(d)$,
+% kjer $d$ preteče vse pozitivne delitelje števila $n$.
+
+% \begin{izrek} \em{(M\"obiusov obrat)} \ 
+% Za aritmetični funkciji $f, g$ velja:
+% \[
+% g(n)\ =\ \sum_{d\,|\,n} f(d)\quad \Longleftrightarrow\quad f(n)\ =\ \sum_{d\,|\,n} \mu\left(\frac{n}{d}\right)g(d)
+% \]
+% \end{izrek}
+
+% \noindent
+% {\em Dokaz:\/} 
+% Najprej vzemimo, da je $g(n) = \sum_{d\,|\,n} f(d)$ za vse $n \in \N$. Potem je
+% \begin{eqnarray*}
+% \sum_{d\,|\,n} \mu\left(\frac{n}{d}\right)g(d)
+%  &=& \sum_{d\,|\,n} \mu\left(\frac{n}{d}\right)\sum_{k\,|\,d} f(k)
+% \ =\ \sum_{k\,|\,n} f(k) \sum_{k\,|\,d\,|\,n} \mu\left(\frac{n}{d}\right) \\
+%  &=& \sum_{k\,|\,n} f(k) \sum_{a\,|\,(n/k)} \mu\left(a\right)\ =\ f(n).
+%  \end{eqnarray*}
+% Drugo enakost smo dobili z zamenjavo vrstnega reda seštevanja, tretjo z uvedbo nove spremenljivke $a = n/d$,
+% četrta pa sledi iz (\ref{mirek}).
+
+% Vzemimo zdaj, da je $f(n)\ =\ \sum_{d\,|\,n} \mu\left(\frac{n}{d}\right)g(d)$ za vse $n \in \N$. Potem je
+% \begin{eqnarray*}
+% \sum_{d\,|\,n} f(d)
+%  &=& \sum_{d\,|\,n} \sum_{k\,|\,d} \mu\left(\frac{d}{k}\right) g(k)
+% \ =\ \sum_{k\,|\,n} g(k) \sum_{k\,|\,d\,|\,n} \mu\left(\frac{d}{k}\right) \\
+%  &=& \sum_{k\,|\,n} g(k) \sum_{b\,|\,(n/k)} \mu\left(b\right)\ =\ g(n).
+%  \end{eqnarray*}
+% Drugo enakost smo dobili z zamenjavo vrstnega reda seštevanja, tretjo z uvedbo nove spremenljivke $b = d/k$,
+% četrta pa sledi iz (\ref{mirek}). \qed
+
+
+% \begin{zgled}
+% \label{tau}
+% \begin{itemize}
+% \item Iz enačbe (\ref{fisum}) sledi z M\"obiusovim obratom, da je 
+% \[
+% \varphi(n)\ =\ \sum_{d\,|\,n}\mu\left(\frac{n}{d}\right)d.
+% \]
+% \item Za vse $n \in \N$ s $\tau(n)$ označimo število vseh pozitivnih deliteljev števila $n$.
+% Torej je $\tau(n) = \sum_{d\,|\,n} 1$, od koder sledi z M\"obiusovim obratom, da je 
+% \[
+% \sum_{d\,|\,n}\mu\left(\frac{n}{d}\right)\tau(d)\ =\ 1.
+% \]
+% \item Za vse $n \in \N$ s $\sigma(n)$ označimo vsoto vseh pozitivnih deliteljev števila $n$.
+% Torej je $\sigma(n) = \sum_{d\,|\,n} d$, od koder sledi z M\"obiusovim obratom, da je 
+% \[
+% \sum_{d\,|\,n}\mu\left(\frac{n}{d}\right)\sigma(d)\ =\ n.
+% \]
+% \end{itemize}
+% \end{zgled}
+
+
+
+
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% \section{Kolobar aritmetičnih funkcij}
+
+% \begin{definicija}
+% Za aritmetični funkciji $f, g: \N \to \C$ in za vse $n \in \N$ naj bo 
+% \[
+% (f * g)(n) \ =\ \sum_{d\,|\,n} f(d)g\left(\frac{n}{d}\right).
+% \]
+% Aritmetična funkcija $f * g$ je {\em Dirichletova konvolucija\/} funkcij $f$ in $g$.
+% \end{definicija}
+
+% \begin{trditev}
+% \label{kolo}
+% Naj bodo $f$, $g$, $h$ aritmetične funkcije. Potem velja:
+% \begin{itemize}
+% \item[\rm (i)] $f * g \ =\ g * f$,
+% \item[\rm (ii)] $(f * g) * h \ =\ f * (g * h)$,
+% \item[\rm (iii)] $f * (g + h) \ =\ f * g + f * h$.
+% \end{itemize}
+% \end{trditev}
+
+% \noindent
+% {\em Dokaz:\/} 
+% \begin{itemize}
+% \item[\rm (i)] 
+% Trditev sledi iz zapisa Dirichletove konvolucije v simetrični obliki
+% \begin{equation}
+% \label{dk}
+% (f * g)(n) \ =\ \sum_{d e = n} f(d)g(e),
+% \end{equation}
+% kjer seštevamo po vseh urejenih parih naravnih števil $(d,e)$, katerih produkt je enak $n$.
+
+% \item[\rm (ii)] 
+% Z uporabo enačbe (\ref{dk}) izračunamo
+% \begin{eqnarray*}
+% ((f * g) * h)(n) &=& \sum_{d e = n} (f * g)(d)h(e)
+% \ =\ \sum_{d e = n} \left(\sum_{a b = d} f(a)g(b)\right)h(e) \\
+%  &=& \sum_{a b e = n} f(a)g(b)h(e)
+%  \ =\ \sum_{a c = n} f(a) \sum_{b e = c} g(b)h(e) \\
+%  &=& \sum_{a c = n} f(a) (g * h)(c)
+%  \ =\ (f * (g * h))(n).
+% \end{eqnarray*}
+% Četrto enakost smo dobili z uvedbo nove spremenljivke $c = b e$.
+
+
+% \item[\rm (iii)]
+% Z uporabo enačbe (\ref{dk}) izračunamo
+% \begin{eqnarray*}
+% (f * (g + h))(n) &=& \sum_{d e = n} f(d)(g+h)(e)
+% \ =\ \sum_{d e = n} f(d)(g(e)+h(e)) \\
+%  &=& \sum_{d e = n} f(d)g(e) + \sum_{d e = n} f(d)h(e) \\
+%  &=& (f * g + f * h)(n). \qedm
+% \end{eqnarray*}
+
+% \end{itemize}
+
+% Iz trditve \ref{kolo} sledi, da je množica vseh aritmetičnih funkcij $f: \N \to \C$ z operacijama $+$ in $*$ komutativen kolobar. Imenujemo ga {\em Dirichletov kolobar} in označimo z $\cal D$. 
+
+% Funkcija $\varepsilon \in {\cal D}$, ki za vse $n \in \N$ zadošča enačbi
+% \[
+% \varepsilon(n)\ =\ \left\{
+% \begin{array}{ll}
+% 1, & n = 1, \\
+% 0, & n > 1,
+% \end{array}
+% \right.
+% \]
+% je enica kolobarja $\cal D$, saj za vse $f \in {\cal D}$ in $n \in \N$ velja
+% \[
+% (f * \varepsilon)(n) \ =\ \sum_{d e = n} f(d)\varepsilon(e) \ =\ f(n)\varepsilon(1) \ =\ f(n).
+% \]
+% Brez težav se lahko prepričamo tudi, da je $\cal D$ cel kolobar in da je funkcija $f \in {\cal D}$
+% obrnljiva natanko tedaj, ko $f(1) \ne 0$.
+
+% Zdaj lahko enačbo (\ref{mirek}) prepišemo v obliki
+% \[
+% \mu * \mathbf{1}\ = \ \varepsilon,
+% \]
+% kjer $\mathbf{1}$ označuje konstantno funkcijo z vrednostjo $1$. Z drugimi besedami, M\"obiusova funkcija
+% je inverz konstantne funkcije $\mathbf{1}$ glede na Dirichletovo konvolucijo:
+% \[
+% \mu \ =\  \mathbf{1}^{-1}.
+% \]
+% M\"obiusov obrat lahko torej zapišemo v obliki
+% \[
+% g\ =\ f * \mathbf{1} \quad \Longleftrightarrow \quad f\ =\ g * \mu,
+% \]
+% kjer njegova veljavnost postane očitna. Zgled \ref{tau} pa lahko prepišemo v obliki
+% \begin{eqnarray*}
+% \varphi * \mathbf{1} \ =\ {\rm id}_\N &\Longrightarrow& \varphi\ =\ \mu * {\rm id}_\N, \\
+% \tau \ =\ \mathbf{1} * \mathbf{1} &\Longrightarrow& \mu * \tau \ =\ \mathbf{1}, \\
+% \sigma \ =\ {\rm id}_\N * \mathbf{1} &\Longrightarrow& \mu * \sigma \ =\ {\rm id}_\N.
+% \end{eqnarray*}
 
 
 \section*{Angleško-slovenski slovar strokovnih izrazov}
