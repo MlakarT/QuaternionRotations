@@ -103,10 +103,10 @@ Naj bosta $p, q \in \H$. Definiramo seštevanje in množenje s skalarjem kot obi
 Prav tako definiramo običajno množenje v skladu z definicijo množenja baznih elementov. Tedaj lahko
 produkt $pq$ napišemo kot
 \begin{center}
-   $pq = (p_{0} + q_{0} - \vec{p} \vec{q}) + (p_{0}\vec{q} + q_{0}\vec{p} + \vec{p}\times\vec{q})$,
+   $pq = (p_{0} q_{0} - \vec{p} \vec{q}) + (p_{0}\vec{q} + q_{0}\vec{p} + \vec{p}\times\vec{q})$,
 \end{center}
 kjer je $\vec{p}\vec{q}$ običajni skalarni produkt v $\R^3$.
-Tedaj $V$ postane $4$-razsežna algebra nad $\R$. Označimo $\H$ in jo imenujemo \emph{Kvaternionska algebra}.
+Tedaj $V$ postane $4$-razsežna algebra nad $\R$, označimo $\H$ in jo imenujemo \emph{Kvaternionska algebra}.
 \end{definicija}
 
 \begin{opomba}
@@ -183,7 +183,7 @@ Naj bosta $u, v \in \Ue$. Za poljuben versor iz $\Ue$ velja $\overline{u} = -u$.
 Od tu sledi da $\dotpr{u}{v} = 0 \iff uv + vu = 0$.
 
 \break
-Pomembna opazka tu je še naslednja: naj bo $u \in \Ue$. Ker $|u| = 1$ sledi, da je $u$ neničeln kvaternion.
+Tukaj opomnimo še naslednje: naj bo $u \in \Ue$. Ker $|u| = 1$ sledi, da je $u$ neničeln kvaternion.
 Ker je $\Ue \subset \H$ in je $\H$ algebra, je vsak neničenli kvaternion obrnljiv. Vemo torej, da obstaja tak $u^{-1}$ da je
 \begin{center}
    $uu^{-1} = 1$.
@@ -192,7 +192,7 @@ Ker je za poljuben $q \in \H, q^{-1} = \dfrac{1}{\overline{q}q} \overline{q}$, z
 \begin{center}
    $u^{-1} = \dfrac{\overline{u}}{|u|^2} = \dfrac{-u}{1} = -u$.
 \end{center}
-Če združimo te dve dejstvi sledi, da
+Če združimo ti dve dejstvi, velja še naslednja enakost:
 \begin{center}
    $uu^{-1} = -uu = -u^2 = 1 \Rightarrow u^2 = -1$.
 \end{center}
@@ -257,8 +257,7 @@ Sledi
 \end{center}
 \qed
 
-Zaradi lažjega računanja bomo polarni zapis kvaternionov spremeniti v eksponentni zapis,
-saj nam to olajša delo pri računanju. Spet se najprej spomnimo kompleksne ravnine, kjer lahko
+Zaradi lažjega računanja bomo polarni zapis kvaternionov spremeniti v eksponentni zapis. Spet se najprej spomnimo kompleksne ravnine, kjer lahko
 vsak $z \in \C$ zapišemo kot $|z|e^{i\varphi}$ za nek $\varphi \in \R$. To naredimo, saj je tako
 algebraična manipulacija kompleksnih izrazov lažja.
 
@@ -393,7 +392,7 @@ Za $v$ velja naslednje:
    & = v\cos\theta + uv\sin\theta \\
    & = (\cos\theta +u\sin\theta)v = e^{u\theta}v.
 \end{align*}
-Torej če s $C$ slikamo $v$:
+Torej, če s $C$ slikamo $v$:
 \begin{center}
    $C(v) = e^{u\theta}v e^{-u\theta} = e^{u\theta}e^{u\theta}v = e^{2u\theta}$.
 \end{center}
@@ -404,13 +403,14 @@ Torej če s $C$ slikamo $v$:
 Žapišemo še $w$ kot $w\cos2\theta + wu\sin2\theta = w\cos2\theta - v\sin2\theta$.
 
 \break
-Ker je $H$ algebra, je obenem tudi vektorski prostor. Zato je smiselno napisati matriko preslikave $C$ glede na bazo $\{v, w\}$.
+Ker je $\H$ algebra, je obenem tudi vektorski prostor. Zato je smiselno napisati matriko preslikave $C$ glede na bazo $\{v, w\}$.
 $C$ tedaj ustreza matriki
 \begin{center}
    $
    \begin{bmatrix}
-      \cos2\theta & -\sin2\theta \\
-      \sin2\theta & \cos2\theta
+      1 & 0 & 0 \\
+      0 & \cos2\theta & -\sin2\theta \\
+      0 & \sin2\theta & \cos2\theta
    \end{bmatrix}
    $
 \end{center}
