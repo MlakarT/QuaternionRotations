@@ -222,40 +222,84 @@ Pogledamo $\theta' = -\theta$ in $u' = \conj{u} = -u$. Tedaj je
 \begin{center}
    $\1\cos\theta' + u'\sin\theta' = \1\cos(-\theta) -u\sin(-\theta) = \1\cos\theta + u\sin\theta = q$.
 \end{center}
-Vidimo, da ima q torej $2$ zapisa.
+Vidimo, da ima q torej $2$ zapisa. Podobno sklepanje ponovimo za kvaternion 0. Za kvaternion 0 v enakosti zadoščata vsaka $u \in \Ue$ in $\theta \in \R$, saj je 0 možno dobiti le z množenjem enotskega kvaterniona
+s skalarjem 0.
 
 
-\begin{opomba}
-Če v trditvi za r vzamemo 1, dobimo vse kvaternione oblike $\1\cos\theta + u\sin\theta$. Torej je množica
-$\left\{ \1\cos\theta + u\sin\theta; \theta \in \R , u \in \Ue \right\} $ enaka $\Qe$.
-\end{opomba}
 
-\noindent
-{\em Dokaz:\/} Naj bo $q \in \H$. Razpišemo $q = q_{0} + \vec{q}$.
-Definiramo $q' = \dfrac{1}{|q|}(q_{0} + \vec{q}) = q'_{0} + \vec{q'}$. Velja $|q'| = \dfrac{1}{|q|}|q| = 1$. 
+% \noindent
+% {\em Dokaz:\/} Naj bo $q \in \H$. Razpišemo $q = q_{0} + \vec{q}$.
+% Definiramo $q' = \dfrac{1}{|q|}(q_{0} + \vec{q}) = q'_{0} + \vec{q'}$. Velja $|q'| = \dfrac{1}{|q|}|q| = 1$. 
 
+% \break
+% \noindent
+% Ker je $q'_{0}\1$ pravokoten na $\vec{q'}$, velja pitagorov izrek:
+% \begin{center}
+%    $|q'_{0}|^2 + |\vec{q'}|^2 = |q'|^2 = 1$.
+% \end{center} 
+% Naj bo $\theta \in \R$. Za $q'_{0}$ vzamemo $\1\cos\theta$. Podobno želimo narediti še s $\vec{q'}$.
+% Ker je $\vec{q'}$ čisti kvaternion (t.j. $\vec{q'} \in \H - \R$), želimo k drugemu delu zapisa dati čisti enotski kvaternion.
+% Naj bo torej $u \in \Ue$. Pogledamo $\1\cos\theta + u\sin\theta$.
+% \begin{center}
+%    $|\1\cos\theta + u\sin\theta|^2 = \cos^2\theta + |u|^2\sin^2\theta$. 
+% \end{center}
+% Ker je $u \in \Ue$, je $|u| = 1$.
+% \begin{center}
+%    $\Rightarrow \cos^2\theta + \sin^2\theta = 1$.
+% \end{center}
+% Imamo torej $q' = q'_{0} + \vec{q'} = \1\cos\theta + u\sin\theta$.
+% Sledi 
+% \begin{center}
+%    $q = |q| \cdot q' = |q|(\1\cos\theta + u\sin\theta)$.
+% \end{center}
 \break
 \noindent
-Ker je $q'_{0}\1$ pravokoten na $\vec{q'}$, velja pitagorov izrek:
+{\em Dokaz: \/}Dovolj je pokazati to enakost za enotske kvaternione, saj ostale lahko dobimo kot produkt enotskega s skalarjem.
+Naj bo $q = q_{0} + \vec{q} \in \Qe$. Ker sta $q_{0}$ in $\vec{q}$ glede na definirani skalarni produkt pravokotna, opazujemo trikotnik s katetama dolžine $q_{0}$ in $|\vec{q}|$, ter hipotenuzo dolžine 1.
+Definiramo $\theta := \arccos(q_{0})$. Tu dopuščamo, da je $\theta$ tudi negativen, ali pa enak $\pm 1$. Tedaj je $\vec{q} = u\sin\theta$ za nek $u \in \Ue$, ki kaže v smeri $\vec{q}$.
+Velja torej
 \begin{center}
-   $|q'_{0}|^2 + |\vec{q'}|^2 = |q'|^2 = 1$.
-\end{center} 
-Naj bo $\theta \in \R$. Za $q'_{0}$ vzamemo $\1\cos\theta$. Podobno želimo narediti še s $\vec{q'}$.
-Ker je $\vec{q'}$ čisti kvaternion (t.j. $\vec{q'} \in \H - \R$), želimo k drugemu delu zapisa dati čisti enotski kvaternion.
-Naj bo torej $u \in \Ue$. Pogledamo $\1\cos\theta + u\sin\theta$.
-\begin{center}
-   $|\1\cos\theta + u\sin\theta|^2 = \cos^2\theta + |u|^2\sin^2\theta$. 
-\end{center}
-Ker je $u \in \Ue$, je $|u| = 1$.
-\begin{center}
-   $\Rightarrow \cos^2\theta + \sin^2\theta = 1$.
-\end{center}
-Imamo torej $q' = q'_{0} + \vec{q'} = \1\cos\theta + u\sin\theta$.
-Sledi 
-\begin{center}
-   $q = |q| \cdot q' = |q|(\1\cos\theta + u\sin\theta)$.
+   $q = q_{0} + \vec{q} = \cos\theta + u\sin\theta$.
 \end{center}
 \qed
+
+% \noindent
+% {\em Dokaz:\/} Želimo pokazati, da sta množici $\Qe$ in $\left\{ \cos\theta + u\sin\theta; u \in \Ue, \theta \in \R \right\}$ enaki. To pokažemo tako, da pokažemo inkluzijo v obe smeri.
+% Ker je desna inkluzija precej trivialna, naredimo to najprej:
+
+% $\left\{ \cos\theta + u\sin\theta; u \in \Ue, \theta \in \R \right\} \subseteq \Qe$:
+
+% \noindent
+% Zadošča pogledati samo dolžino tako napisanega kvaterniona. Izračunamo torej
+% \begin{center}
+%    $ |\cos\theta + u\sin\theta|^2 = \cos^2\theta +|u|^2\sin^2\theta$. 
+% \end{center}
+% Ker je $u \in \Ue$, velja $|u| = 1$. V izračun vstavimo to enkost in dobimo
+% \begin{center}
+%    $ \cos^2\theta +1 \sin^2\theta = 1 $
+% \end{center}
+
+% \noindent
+% Pogledamo še levo inkluzijo:
+
+% $\Qe \subseteq \left\{ \cos\theta + u\sin\theta; u \in \Ue, \theta \in \R \right\}$:
+
+% \noindent
+% Naj bo $q \in \Qe$ poljuben. Želimo pokazati, da se $q$ da zapisati kot $\cos\theta + u\sin\theta$.
+% Zapišemo $q = q_{0} + \vec{q}$. Spomnimo se, da sta $q_{0}$ in $\vec{q}$ pravokotna v $\H$ glede na definirani skalarni produkt.
+% Če zožimo pogled na ravnino, ki jo razpenjata $q_{0}$ in $\vec{q}$, lahko vzamemo argument kvaterniona kot
+% \begin{center}
+%    $arg(q) = arctan\bigl(\dfrac{|\vec{q}|}{q_{0}}\bigr) := \theta$.
+% \end{center}
+% Prav tako iz te izbire in relacije $q_{0}^2 + |\vec{q}|^2 = 1$ sledi, da je $q_{0}^2 = \cos^2\theta$ in $|\vec{q}|^2 =\sin^2\theta$.
+% Torej je $q_{0} = \cos\theta$, za $\vec{q}$ pa potrebujemo celoten vektorski del, denimo k, da $\vec{q} = k\sin\theta$. Ker je $\vec{q} \ in \H - \R$,
+% sledi da je tudi $k \in \H - \R$. Pogledamo še dolžino:
+% \begin{center}
+%    $1 = |q|^2 = q_{0}^2 + |\vec{q}|^2 = \cos^2\theta + |k|^2\sin^2\theta$.
+% \end{center}
+% Iz te enakosti sledi, da je $|k| = 1$, in ker je $k$ čisti vektorski kvaternion, je torej čisti verson in
+% $k \in \Ue$.
+% \qed
 
 Zaradi lažjega računanja bomo polarni zapis kvaternionov spremeniti v eksponentni zapis. Spet se najprej spomnimo kompleksne ravnine, kjer lahko
 vsak $z \in \C$ zapišemo kot $|z|e^{i\varphi}$ za nek $\varphi \in \R$. To naredimo, saj je tako
@@ -263,7 +307,7 @@ algebraična manipulacija kompleksnih izrazov lažja.
 
 Vzamemo Taylorjev razvoj $e^t$. Velja
 \begin{center}
-   $e^t = 1+x+\dfrac{x^2}{2}+\dfrac{x^3}{6}+\dfrac{x^4}{24} + \cdots$.
+   $e^t = 1+x+\dfrac{t^2}{2}+\dfrac{t^3}{6}+\dfrac{t^4}{24} + \cdots$.
 \end{center}
 V Taylorjev razvoj vstavimo $t = u\theta, u \in \Ue, \theta \in \R$. Dobimo %Tukej obrazlozi zakaj to lahko nardimo
 \begin{center}
@@ -274,7 +318,6 @@ Spomnimo se, da ker je $u \in \Ue$, velja $u^2=-1$. Ker $e^t$ konvergira enakome
    $1 + u\theta + \dfrac{(u\theta)^2}{2} + \dfrac{(u\theta)^3}{6} + \dfrac{(u\theta)^4}{24} + \cdots = (1 + \dfrac{(u\theta)^2}{2} + \dfrac{(u\theta)^4}{24}+ \cdots) + (u\theta + \dfrac{(u\theta)^3}{6} + \cdots) = $
    $(1-\dfrac{\theta^2}{2}+\dfrac{\theta^4}{24}- \cdots) + u(\theta - \dfrac{\theta^3}{6} +\dfrac{\theta^5}{120} - \cdots)$
 \end{center}
-\break
 V levem in desnem oklepaju vidimo taylorjev razvoj funkcij cos in sin. Sledi torej
 \begin{center}
    $e^{u\theta} = \cos\theta  + u\sin\theta$.
@@ -288,9 +331,10 @@ $p = e^{u\theta}, q = e^{v\varphi}$, lahko produkta napišemo kot
 \begin{center}
    $p q = e^{u\theta} e^{v\varphi}$ in $q p = e^{v\varphi}e^{u\theta}$.
 \end{center}
+\end{opomba}
 Zaradi nekomutativnosti prav tako sledi da $e^{u\theta} e^{v\varphi} \neq e^{v\varphi}e^{u\theta}$. Če bi tak produkt obstajal, bi v eksponentu imeli primer nekomutativne vsote,
 kar pa je seveda v protislovju z definicijo vsote iz algebre $\H$.
-\end{opomba}
+
 
 Zanima nas, kdaj taki kvaternioni komutirajo.
 \begin{trditev}
@@ -311,7 +355,7 @@ Spomnimo se, da skalarji komutirajo z vsemi kvaternioni. Torej je
 
 Trditev nam pove, da kvaternioni z različnim realnim argumentom in istim versorjem med sabo komutirajo. Lahko torej zapišemo, da 
 \begin{center}
-   $p,q \in \H. pq = qp \iff U_{p} = U_{q}.$
+   $p,q \in \H:  pq = qp \iff U_{p} = U_{q}.$
 \end{center}
 Prav tako komutirata kvaterniona, ki sta zapisana s konjugiranima versorjema, saj je to ekvivalentno negativnemu argumentu v polarnem zapisu.
 
@@ -402,7 +446,6 @@ Torej, če s $C$ slikamo $v$:
 \end{center}
 Žapišemo še $w$ kot $w\cos2\theta + wu\sin2\theta = w\cos2\theta - v\sin2\theta$.
 
-\break
 Ker je $\H$ algebra, je obenem tudi vektorski prostor. Zato je smiselno napisati matriko preslikave $C$ glede na bazo $\{v, w\}$.
 $C$ tedaj ustreza matriki
 \begin{center}
@@ -418,12 +461,11 @@ Preslikava C torej predstavlja transformacijo $\H$, ki fiksira skalarje $\R$ in 
 
 \qed
 
-Omenimo še, da $C$ ohranja orientacijo, saj je ortogonalna preslikava. $C$ torej zarotira ravnino v pozitivni smeri.
+Omenimo še, da $C$ ohranja orientacijo, saj je ortogonalna preslikava. Imamo torej rotacijo ravnine v pozitivni smeri.
 
 \subsection{Izbira smeri in baze}
-\section{Vektorsko polje nad $\H$}
-\subsection*{Motivacija}
-\subsection{Vpeljava vektorskega polja s preslikavo $C$}
+
+\section{Rotacije opisane z Eulerjevimi koti}
 
 
 
