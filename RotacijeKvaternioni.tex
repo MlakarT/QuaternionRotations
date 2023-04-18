@@ -52,36 +52,72 @@ Oddelek za matematiko}
 
 \section{Uvod}
 
-Rotacije $\R^3$ navadno opisujemo z linearnimi preslikavami oziroma njim pripadajočimi matrikami.
-Zaradi narave matričnega množenja so lahko take operacije precej računsko časovno in prostorsko zahtevne. Tako lahko rotacije
-$\R^3$ predstavimo kot stranske učinke transformacij $\E^4 \simeq \H$.
+Rotacije prostora $\R^3$ navadno opišemo z linearnimi preslikavami prostora oziroma njim pripadajočimi matrikami.
+V splošni uporabi je za opis orientacije objekta tako imenovan \emph{Sistem Eulerjevih kotov}. Znameniti \emph{Eulerjev izrek o rotacijah} namreč pravi,
+da se da vsako rotacijo opisati s tremi parametri oziroma koti.
 
-
-Najprej se spomnimo rotacij na $\R^2 \simeq \C$. Naj bo $w = \frac{v}{|v|}$ za poljuben $v \in \C$.
-Preslikava $\varphi : \C \rightarrow \C : \varphi (z) = wz$ je bijektivna preslikava, ki zavrti celotno kompleksno ravnino za
-kot $arg(z)$ okoli izhodišča.
-
-
-Če $v$ zapišemo v polarnem zapisu kot $|z| e^{i \theta}$, je tedaj preslikava 
+Težava nastopi, ko moramo tako rotacijo zapisati. Za vsakega od kotov potrebujemo svojo preslikavo, ki jo
+nato komponiramo z drugima dvema, da dobimo končno preslikavo:
 \begin{center}
-   $\varphi : \left[ 0, 2\pi\right] \times \C \rightarrow \C :$\\
-   \vspace*{1ex}
-   $\varphi(\theta, z) = z e^{i\theta}$
+   $R = BCD$,
 \end{center}
-zvezno odvedljiva na $\left[0, 2\pi\right] \times \C$. Za fiksen $z \in \C$ preslikava $\varphi$ opiše krožnico z radijem $|z|$,
-za fiksen $\theta$ pa preslikava opiše rotacijo ravnine za kot $\theta$.
+kjer je $R$ končna rotacija, $B, C, D$ pa so rotacije posameznih ravnin glede na želeni kot/parameter.
+Za elemente matrike, ki pripada R, potrebujemo 9  podatkov [footnote člank], ki jih izračunamo z matričnim množenjem.
 
-Vemo torej, da se vsak $z \in \C$ da zapisati v polarnih koordinatah. Spomnemo se zapisa
+V splošnem sistem deluje, vendar problem nastopi, kadar moramo zaporedoma aplicirati več takih preslikav; 
+problem je v številu operacij pri matričnem množenju. To nas motivira, da uporabimo drug, bolj učinkovit pristop.
+
+Za motivacijo uporabimo analog rotacij v dveh dimenzijah, in sicer množenje kompleksnih števil.
+Spomnio se, da množenje kompleksnega števila $z$ z enotskim komplekstim številom $e^{i\theta}$ zavrti $z$ okoli koordinatnega izhodišča za kot $\theta$.
+Podobno bi želeli narediti v našem, 3-razsežnem prostoru, vendar za to potrebujemo množenje.
+Ta problem je rešil Sir William Rowan Hamilton, ko je oktobra leta 1843 na mostu Brougham Bridge dognal identitete za množenje v 4-razsežnem prostoru.
+Ta ugotovitev je bila tako odmevna, da je trenutek za vedno zabeležen v kamnu na mostu, kjer je vklesano
 \begin{center}
-   $z = |z|e^{i\theta} = |z|\text{cos}\theta + |z|i\text{sin}\theta$,
+   \emph{ Here as he walked by
+   on the 16th of October 1843
+   Sir William Rowan Hamilton
+   in a flash of genius discovered
+   the fundamental formula for
+   quaternion multiplication}\\
+   $i^2 = j^2 = k^2 = ijk = -1$\\
+   \emph{ \& cut it on a stone of this bridge}.
 \end{center}
-kjer je $\theta \in \R$. Zapis ni enoličen, saj nam vsaka $\theta' = \theta + 2k\pi; k \in \Z$ opiše isto kompleksno število.
-Tak zapis bomo v podobnem smislu uporabili kasneje.
 
-Definiramo $\varPhi : \R^2 \rightarrow \C : (x,y) \mapsto \text{x} + i\text{y}$. S preprostim računom pokažemo, da je $\varPhi$ izomorfizem.
+Ekvivalentno Eulerjevim kotom s pomočjo kvaternionov dobimo tako imenovane \emph{Eulerjeve parametre}, s katerimi
+lahko poljubno rotacijo/orientacijo opišemo samo s štirimi parametri. Prav tako je za večkratno apliciranje preslikav rotacij sedaj
+potrebnih veliko manj operacij. To nas motivira, da predpise preslikav rotacij zapišemo s kvaternionskim množenjem.
 
-Vidimo, da namesto množenja vektorja z matriko lahko rotacijo realne ravnine predstavimo s preprostim množenjem dveh kompleksnih števil.
-To motivira podobni razmislek za rotacije v $\R^3$.
+
+% Rotacije $\R^3$ navadno opisujemo z linearnimi preslikavami oziroma njim pripadajočimi matrikami.
+% Zaradi narave matričnega množenja so lahko take operacije precej računsko časovno in prostorsko zahtevne. Tako lahko rotacije
+% $\R^3$ predstavimo kot stranske učinke transformacij $\E^4 \simeq \H$.
+
+
+% Najprej se spomnimo rotacij na $\R^2 \simeq \C$. Naj bo $w = \frac{v}{|v|}$ za poljuben $v \in \C$.
+% Preslikava $\varphi : \C \rightarrow \C : \varphi (z) = wz$ je bijektivna preslikava, ki zavrti celotno kompleksno ravnino za
+% kot $arg(z)$ okoli izhodišča.
+
+
+% Če $v$ zapišemo v polarnem zapisu kot $|z| e^{i \theta}$, je tedaj preslikava 
+% \begin{center}
+%    $\varphi : \left[ 0, 2\pi\right] \times \C \rightarrow \C :$\\
+%    \vspace*{1ex}
+%    $\varphi(\theta, z) = z e^{i\theta}$
+% \end{center}
+% zvezno odvedljiva na $\left[0, 2\pi\right] \times \C$. Za fiksen $z \in \C$ preslikava $\varphi$ opiše krožnico z radijem $|z|$,
+% za fiksen $\theta$ pa preslikava opiše rotacijo ravnine za kot $\theta$.
+
+% Vemo torej, da se vsak $z \in \C$ da zapisati v polarnih koordinatah. Spomnemo se zapisa
+% \begin{center}
+%    $z = |z|e^{i\theta} = |z|\text{cos}\theta + |z|i\text{sin}\theta$,
+% \end{center}
+% kjer je $\theta \in \R$. Zapis ni enoličen, saj nam vsaka $\theta' = \theta + 2k\pi; k \in \Z$ opiše isto kompleksno število.
+% Tak zapis bomo v podobnem smislu uporabili kasneje.
+
+% Definiramo $\varPhi : \R^2 \rightarrow \C : (x,y) \mapsto \text{x} + i\text{y}$. S preprostim računom pokažemo, da je $\varPhi$ izomorfizem.
+
+% Vidimo, da namesto množenja vektorja z matriko lahko rotacijo realne ravnine predstavimo s preprostim množenjem dveh kompleksnih števil.
+% To motivira podobni razmislek za rotacije v $\R^3$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Kvaternionska algebra}
@@ -182,7 +218,6 @@ Naj bosta $u, v \in \Ue$. Za poljuben versor iz $\Ue$ velja $\overline{u} = -u$.
 \end{center}
 Od tu sledi da $\dotpr{u}{v} = 0 \iff uv + vu = 0$.
 
-\break
 Tukaj opomnimo še naslednje: naj bo $u \in \Ue$. Ker $|u| = 1$ sledi, da je $u$ neničeln kvaternion.
 Ker je $\Ue \subset \H$ in je $\H$ algebra, je vsak neničenli kvaternion obrnljiv. Vemo torej, da obstaja tak $u^{-1}$ da je
 \begin{center}
@@ -252,11 +287,12 @@ s skalarjem 0.
 % \begin{center}
 %    $q = |q| \cdot q' = |q|(\1\cos\theta + u\sin\theta)$.
 % \end{center}
-\break
+
+
 \noindent
 {\em Dokaz: \/}Dovolj je pokazati to enakost za enotske kvaternione, saj ostale lahko dobimo kot produkt enotskega s skalarjem.
 Naj bo $q = q_{0} + \vec{q} \in \Qe$. Ker sta $q_{0}$ in $\vec{q}$ glede na definirani skalarni produkt pravokotna, opazujemo trikotnik s katetama dolžine $q_{0}$ in $|\vec{q}|$, ter hipotenuzo dolžine 1.
-Definiramo $\theta := \arccos(q_{0})$. Tu dopuščamo, da je $\theta$ tudi negativen, ali pa enak $\pm 1$. Tedaj je $\vec{q} = u\sin\theta$ za nek $u \in \Ue$, ki kaže v smeri $\vec{q}$.
+Definiramo $\theta := \arccos(q_{0})$. Tu dopuščamo, da je $q_{0}$ tudi negativen, ali pa enak $\pm 1$. Tedaj je $\vec{q} = u\sin\theta$ za nek $u \in \Ue$, ki kaže v smeri $\vec{q}$.
 Velja torej
 \begin{center}
    $q = q_{0} + \vec{q} = \cos\theta + u\sin\theta$.
@@ -305,9 +341,9 @@ Zaradi lažjega računanja bomo polarni zapis kvaternionov spremeniti v eksponen
 vsak $z \in \C$ zapišemo kot $|z|e^{i\varphi}$ za nek $\varphi \in \R$. To naredimo, saj je tako
 algebraična manipulacija kompleksnih izrazov lažja.
 
-Vzamemo Taylorjev razvoj $e^t$. Velja
+Vzamemo Taylorjev razvoj $e^t$:
 \begin{center}
-   $e^t = 1+x+\dfrac{t^2}{2}+\dfrac{t^3}{6}+\dfrac{t^4}{24} + \cdots$.
+   $e^t = 1+t+\dfrac{t^2}{2}+\dfrac{t^3}{6}+\dfrac{t^4}{24} + \cdots$.
 \end{center}
 V Taylorjev razvoj vstavimo $t = u\theta, u \in \Ue, \theta \in \R$. Dobimo %Tukej obrazlozi zakaj to lahko nardimo
 \begin{center}
@@ -353,10 +389,7 @@ Spomnimo se, da skalarji komutirajo z vsemi kvaternioni. Torej je
 \end{align*}
 \qed
 
-Trditev nam pove, da kvaternioni z različnim realnim argumentom in istim versorjem med sabo komutirajo. Lahko torej zapišemo, da 
-\begin{center}
-   $p,q \in \H:  pq = qp \iff U_{p} = U_{q}.$
-\end{center}
+Trditev nam pove, da kvaternioni z različnim realnim argumentom in istim versorjem med sabo komutirajo.
 Prav tako komutirata kvaterniona, ki sta zapisana s konjugiranima versorjema, saj je to ekvivalentno negativnemu argumentu v polarnem zapisu.
 
 \section{Preslikava rotacije}

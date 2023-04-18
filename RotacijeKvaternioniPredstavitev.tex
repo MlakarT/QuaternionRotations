@@ -1,0 +1,200 @@
+\documentclass{beamer}
+
+\usepackage[slovene]{babel}
+\usepackage{amsfonts,amssymb}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\graphicspath{./project/media/videos/scene/1080p60/}
+\usepackage{multimedia}
+
+\usetheme{Warsaw}
+
+\def\N{\mathbb{N}} % mnozica naravnih stevil
+\def\Z{\mathbb{Z}} % mnozica celih stevil
+\def\Q{\mathbb{Q}} % mnozica racionalnih stevil
+\def\R{\mathbb{R}} % mnozica realnih stevil
+\def\C{\mathbb{C}} % mnozica kompleksnih stevil
+\def\H{\mathbb{H}} % mnozica kvaternionov
+\def\E{\mathbb{E}} % evklidski prostor 
+\def\Qe{\textbf{Q}_{e}} % mnozica versorjev
+\def\Ue{\textbf{U}_{e}} % mnozica pravih versorjev
+\def\1{\textbf{\emph{1}}}
+\newcommand{\geslo}[2]{\noindent\textbf{#1} \quad \hangindent=1cm #2\\[-1pc]}
+\newcommand{\dotpr}[2]{\langle #1, #2 \rangle}
+\newcommand{\conj}[1]{\overline{#1}}
+
+
+\def\qed{$\hfill\Box$}   % konec dokaza
+\def\qedm{\qquad\Box}   % konec dokaza v matematičnem načinu
+\newtheorem{izrek}{Izrek}
+\newtheorem{trditev}{Trditev}
+\newtheorem{posledica}{Posledica}
+\newtheorem{lema}{Lema}
+\newtheorem{opomba}{Opomba}
+\newtheorem{definicija}{Definicija}
+\newtheorem{zgled}{Zgled}
+\newtheorem{primer}{Primer}
+\newtheorem{zgledi}{Zgledi uporabe}
+\newtheorem{zglediaf}{Zgledi aritmetičnih funkcij}
+\newtheorem{oznaka}{Oznaka}
+
+\title{Rotacije opisane s Kvaternioni}
+\author{Timotej Mlakar}
+\institute{Fakulteta za matematiko in fiziko \\
+Oddelek za matematiko}
+\date{\today}
+
+\begin{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+   \begin{definicija}
+      Naj bo $V$ 4-razsežen vektorski prostor z bazo $\{\1, i, j, k\}$.
+      Elemente $V$ označimo $\textbf{q} = q_{0}\1 + q_{1}i + q_{2}j + q_{3}k = q_{0} + \vec{q}$.
+      Vektorski prostor $V$ opremimo s operacijo množenja:
+      \begin{center}
+         $\1 \1 = \1, \hspace{1em}  \1i = i, \hspace{1em} \1j = j, \hspace{1em} \1k = k,$\\
+         $ij = k, \hspace{1em} jk = i, \hspace{1em} ki = j,$\\
+         $i^2 = j^2 = k^2 = ijk = -1\1$.
+      \end{center}
+      Tedaj $V$ postane 4-razsežna algebra nad $\R$, ki jo označimo s $\H$ in imenujemo \emph{Kvaternionska Algebra}.
+   \end{definicija}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+   \begin{oznaka}
+      \[
+      \conj{q} = q_{0} - \vec{q}.
+      \]
+   \end{oznaka}
+
+   \pause
+   \begin{definicija}
+      Naj bo $q \in \H$. Inverz $q$ za množenje je je tedaj 
+      \[
+      q^{-1} = \dfrac{1}{q\conj{q}} \conj{q}   
+      \]
+   \end{definicija}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+   \begin{definicija}
+      Na $\H$ vpeljemo skalarni produkt, sicer za $p, q \in \H$:
+      \[
+      \dotpr{p}{q} = \frac{1}{2}\big( \conj{p}q + \conj{q}p \big)
+      \]
+      Norma, porojena s skalarnim produktom je
+      \[
+      ||q|| = |q| = \sqrt{\dotpr{q}{q}}   
+      \]
+   \end{definicija}
+
+   \begin{opomba}
+      Za vsak $q \in \H$ je $\dotpr{q}{q} = q\conj{q} = \conj{q}q$ in
+      \[
+        |q| = \sqrt{q\conj{q}} 
+      \]
+   \end{opomba}
+
+   \pause
+   \begin{opomba}
+      Norma na $\H$ je multiplikativna.
+   \end{opomba}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+   \begin{oznaka}
+      \[
+         \Qe = \left\{ q \in \H; |q| = 1 \right\}
+      \]
+      \[
+        \Ue = \left\{ u \in \H; |u| = 1 \wedge u = \vec{u} \right\} 
+      \]
+   \end{oznaka}
+
+   \pause
+   \begin{opomba}
+      Za $u \in \Ue$ velja
+      \[
+        u^2 = -1. 
+      \]
+      Za poljubna $u, v \in \Ue$ velja
+      \[
+      \dotpr{u}{v} = 0 \iff uv + vu = 0 \iff uv = -vu.
+      \]
+   \end{opomba}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+   \begin{trditev}
+      Naj bo $q \in \Qe$. Obstajata $\theta \in \R$ in $u \in \Ue$, da je
+      \[
+        q  = \cos\theta + u\sin\theta.
+      \]
+   \end{trditev}
+
+   \begin{opomba}
+      Polarni zapis kvaterniona ni enoličen.
+   \end{opomba}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+   \begin{trditev}
+      Naj bosta $p, q \in \Qe$ taka, da $\exists u\in \Ue$, da je $p = e^{u\theta}$ in $q = e^{u\varphi}$,
+      za neka $\theta, \varphi \in \R$.
+      Tedaj je $pq = qp$.
+   \end{trditev}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+   \begin{definicija}
+      Naj bosta $p, q \in \Qe$. Definiramo preslikavo $C_{p,q} : \H \to \H$
+      \[
+      C_{p,q} x := pqx.   
+      \]
+   \end{definicija}
+
+   \pause
+   \begin{definicija}
+      Posebej označimo preslikavo $C = C_{q, \conj{q}}$, za $q = e^{u\theta}; u \in \Ue, \theta \in \R$
+      \[
+      Cx := C_{q, \conj{q}}x = e^{u\theta}xe^{-u\theta}.   
+      \]
+   \end{definicija}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+   \begin{izrek}
+      Naj bo $u \in \Ue$ in $\theta \in \R$ ter $q = e^{u\theta}$. Preslikava $C = C_{q, \conj{q}}$ je 
+      rotacija ravnine, pravokotne na $u$ za kot $2\theta$.
+   \end{izrek}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
