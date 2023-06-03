@@ -6,6 +6,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{graphicx}
+\graphicspath{{./imgs/}}
 \usepackage{url}
 
 \def\N{\mathbb{N}} % mnozica naravnih stevil
@@ -46,6 +47,7 @@ Oddelek za matematiko}
 
 
 \maketitle
+\tableofcontents
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -86,7 +88,7 @@ Ta ugotovitev je bila tako odmevna, da je trenutek za vedno zabeležen v kamnu n
 Ekvivalentno Eulerjevim kotom s pomočjo kvaternionov dobimo tako imenovane \emph{Eulerjeve parametre}, s katerimi
 lahko poljubno rotacijo/orientacijo opišemo samo s štirimi parametri. Prav tako je za večkratno apliciranje preslikav rotacij sedaj
 potrebnih veliko manj operacij. To nas motivira, da predpise preslikav rotacij zapišemo s kvaternionskim množenjem.
-
+\newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -115,16 +117,12 @@ produkt $pq$ napišemo kot
 kjer je $\vec{p}\vec{q}$ običajni skalarni produkt v $\R^3$.
 Tedaj $V$ postane $4$-razsežna algebra nad $\R$, označimo $\H$ in jo imenujemo \emph{Kvaternionska algebra}.\emph{~\cite{dam1998quaternions}}
 \end{definicija}
-\break
 \begin{opomba}
 Za $p,q \in \H, \lambda \in \R$ velja
 \begin{center}
       $(\lambda p)q = p(\lambda q) = \lambda (pq)$.
 \end{center}
 \end{opomba}
-
-% tukej pride mal zgodovine o kvaternionih, zgodba od Hamiltona
-
 \begin{definicija}
 Naj bo $q = q_{0} + \vec{q}\in \H$. S $\overline{q} = q_{0} -\vec{q}$ označimo \emph{konjugirani kvaternion} q.
 \end{definicija}
@@ -135,6 +133,7 @@ Velja, da je $q\overline{q} \in \R$. Tako lahko definiramo še
 Prav tako lahko vidimo da je $\overline{p \cdot q} = \overline{q} \cdot \overline{p}$. Ker množenje kvaternionov ni komutativno,
 v splošnem $\overline{pq} \neq \overline{qp}$. Ker je $\H$ algebra, je na njej smiselno definirati skalarni produkt.
 
+\break
 \begin{definicija}
 Naj bosta $p,q \in \H$. Definiramo skalarni produkt kvaternionov
 \begin{center}
@@ -213,7 +212,6 @@ zapišemo kot $z = e^{i\theta}$.
 V kompleksni ravnini je ta zapis dobro definiran, saj imamo le eno kompleksno enoto $i$.
 V kvaternionih pa imamo celo množico čistih enotskih kvaternionov $\Ue$, s katerimi lahko zapišemo kvaternion.
 
-\break
 \begin{trditev}
 Naj bo $q \in \Qe$. Tedaj obstajata $\theta \in \R$ in $u \in \Ue$, da je
 \begin{center}
@@ -221,18 +219,6 @@ Naj bo $q \in \Qe$. Tedaj obstajata $\theta \in \R$ in $u \in \Ue$, da je
 \end{center}
 \end{trditev}
 
-\begin{opomba}
-Preden dokažemo trditev opazimo, da tukaj zagotavljamo \emph{le obstoj} in ne enoličnosti.
-
-\end{opomba}
-Preprost protiprimer za enoličnost je $q \in \Qe, q = \1\cos\theta + u\sin\theta$.
-Pogledamo $\theta' = -\theta$ in $u' = \conj{u} = -u$. Tedaj je
-\begin{center}
-   $\1\cos\theta' + u'\sin\theta' = \1\cos(-\theta) -u\sin(-\theta) = \1\cos\theta + u\sin\theta = q$.
-\end{center}
-Vidimo, da ima q torej $2$ zapisa. Podobno sklepanje ponovimo za kvaternion 0. Za kvaternion 0 v enakosti zadoščata vsaka $u \in \Ue$ in $\theta \in \R$, saj je 0 možno dobiti le z množenjem enotskega kvaterniona
-s skalarjem 0.
-\\
 
 \noindent
 {\em Dokaz: \/}Enakost pokažemo za enotske kvaternione, saj poljuben kvaternion lahko dobimo kot produkt enotskega s skalarjem.
@@ -245,8 +231,18 @@ Velja torej
 \qed
 
 \noindent Dokaz je povzet po Lyonsu. \cite{2021Quaternions}
-
-
+\begin{opomba}
+Opazimo, da nam trditev zagotavlja \emph{le obstoj} in ne enoličnosti.
+\end{opomba}
+\break
+Preprost protiprimer za enoličnost je $q \in \Qe, q = \1\cos\theta + u\sin\theta$.
+Pogledamo $\theta' = -\theta$ in $u' = \conj{u} = -u$. Tedaj je
+\begin{center}
+   $\1\cos\theta' + u'\sin\theta' = \1\cos(-\theta) -u\sin(-\theta) = \1\cos\theta + u\sin\theta = q$.
+\end{center}
+Vidimo, da ima q torej $2$ zapisa. Podobno sklepanje ponovimo za kvaternion 0. Za kvaternion 0 v enakosti zadoščata vsaka $u \in \Ue$ in $\theta \in \R$, saj je 0 možno dobiti le z množenjem enotskega kvaterniona
+s skalarjem 0.
+   
 Zaradi lažjega računanja bomo polarni zapis kvaternionov spremeniti v eksponentni zapis. Spet se najprej spomnimo kompleksne ravnine, kjer lahko
 vsak $z \in \C$ zapišemo kot $|z|e^{i\varphi}$ za nek $\varphi \in \R$. To naredimo, saj je tako
 algebraična manipulacija kompleksnih izrazov lažja.
@@ -278,7 +274,7 @@ $p = e^{u\theta}, q = e^{v\varphi}$, lahko produkta napišemo kot
    $p q = e^{u\theta} e^{v\varphi}$ in $q p = e^{v\varphi}e^{u\theta}$.
 \end{center}
 \end{opomba}
-Zaradi nekomutativnosti prav tako sledi da $e^{u\theta} e^{v\varphi} \neq e^{v\varphi}e^{u\theta}$. Če bi tak produkt obstajal, bi v eksponentu imeli primer nekomutativne vsote,
+Zaradi nekomutativnosti prav tako sledi, da $e^{u\theta} e^{v\varphi} \neq e^{v\varphi}e^{u\theta}$. Če bi tak produkt obstajal, bi v eksponentu imeli primer nekomutativne vsote,
 kar pa je seveda v protislovju z definicijo vsote iz algebre $\H$.
 
 
@@ -321,6 +317,8 @@ Uporabimo komutativnost skalarjev in levo distributivnost nad kvaternioni:
 \end{center}
 S podobnim računom pokažemo, da je $R_{q}$ tudi linearna. Poleg tega vidimo, da sta preslikavi ortogonalni,
 t.j., da ohranjata skalarni produkt. Iz tega sledi tudi, da sta preslikavi $L_{q}$ in $R_{q}$ izometriji prostora.
+
+\newpage
 Ti preslikavi med sabo komutirata, saj za $p,q \in \Qe$ in fiksen $x \in \H$:
 \begin{center}
    $(L_{p} \circ R_{q})x = p(xq) = (px)q = (R_{q} \circ L_{p})x$.
@@ -356,7 +354,7 @@ Torej je dalje skalarni produkt enak $\frac{1}{2}(\alpha q - \alpha q) = 0$. Pro
 Naj bo $u \in \Ue$ in $\theta \in \R$. Preslikava $C = C_{q, \conj{q}}$ je rotacija ravnine, 
 pravokotne na $u$ za kot $2\theta$.
 \end{izrek}
-
+\break
 \noindent
 {\em Dokaz:\/} Najprej pogledamo, kaj se zgodi z kvaternioni, ki ležijo na ogrinjači versorja $u$.
 Naj bo $u \in \Ue$.
@@ -387,7 +385,7 @@ Torej, če s $C$ slikamo $v$:
    $Cw = e^{u\theta}w e^{-u\theta} = e^{u\theta}uve^{-u\theta} = e^{u\theta}ue^{u\theta}v = e^{u\theta}e^{u\theta}uv = e^{2u\theta}w$.
 \end{center}
 Žapišemo še $w$ kot $w\cos2\theta + wu\sin2\theta = w\cos2\theta - v\sin2\theta$.
-\newpage
+
 Ker je $\H$ algebra, je obenem tudi vektorski prostor. Zato je smiselno napisati matriko preslikave $C$ glede na bazo $\{u, v, w\}$.
 $C$ tedaj ustreza matriki
 \begin{center}
@@ -445,6 +443,45 @@ Ker sta $v$ in $w$ odvisna le od $u$ in $\nu$, zapišimo sliko glede na njiju:
         &= \dotpr{\nu}{u}(1 - \cos\theta)u + \cos\theta \nu + \sin\theta u\times\nu.
 \end{align*}
 Tukaj opazimo, da velja naslednja enakost: $u(\nu - \dotpr{\nu}{u}u) = u\times\nu$. S tem smo zapisali sliko poljubnega kvaterniona pri željeni rotaciji.
+\subsubsection{Primer uporabe}
+
+\begin{zgled}
+   Preslikajmo $(1, -2, 3)$ za kot $\frac{\pi}{4}$ okoli smeri $(1,1,1)$.
+\end{zgled}
+Vzamemo kvaterniona $\nu = (1, -2, 3), u = \frac{1}{\sqrt{3}}(1,1,1)$.
+\begin{figure}[h]
+   \centering
+   \includegraphics[width = 0.5\textwidth]{vektorji_u_nu}
+   \caption{Kvaterniona $\nu$ in $u$ v $\R^3$.}
+\end{figure}\\
+Ker sta $\nu$ in $u \in \R^3$, skalarni produkt $\dotpr{\nu}{u}$ ustreza kar običajnemu skalarnemu produktu vektorjev $\nu, u$ v $\R^3$.
+\begin{align*}
+   \dotpr{\nu}{u} &= \nu \cdot u = \frac{1}{\sqrt{3}} (1, -2, 3) \cdot (1,1,1)\\
+                  &= \frac{2}{\sqrt{3}},
+\end{align*}
+
+\noindent pogledamo še njun vektorski produkt
+\begin{align*}
+   u \times \nu &= \frac{1}{\sqrt{3}}(1,1,1)\times(1,-2,3)\\
+                &= \frac{1}{\sqrt{3}}(5,-2,-3).
+\end{align*}
+
+Vstavimo $u$ in $\nu$ ter dobljene rezultate v končo formulo
+\begin{align*}
+   C\nu &= \dotpr{\nu}{u}(1 - \cos\theta)u + \cos\theta \nu + \sin\theta u\times\nu\\
+        &= \frac{2}{\sqrt{3}}(1 - \cos\frac{\pi}{4}) \cdot \frac{1}{\sqrt{3}}(1,1,1) + \cos\frac{\pi}{4}(1,-2,3) + \sin\frac{\pi}{4} \cdot \frac{1}{\sqrt{3}}(5,-2,-3)\\
+        &= \frac{2}{3}(1 - \frac{1}{\sqrt{2}})(1,1,1) + \frac{1}{\sqrt{2}}(1,-2,3) + \frac{1}{\sqrt{6}}(5,-2,-3)\\
+        &= \big( \frac{4-2\sqrt{2}}{6} + \frac{3\sqrt{2}}{6} + \frac{5\sqrt{6}}{6},\frac{4-2\sqrt{2}}{6} - \frac{6\sqrt{2}}{6} - \frac{2\sqrt{6}}{6}, \frac{4-2\sqrt{2}}{6} + \frac{9\sqrt{2}}{6} - \frac{3\sqrt{6}}{6}\big)\\
+        &\approxeq (2.94, -2.04, 1.09).
+\end{align*}
+
+\begin{figure}[h]
+   \centering
+   \includegraphics[width = 0.5\textwidth]{vektorji_nu_nu2}
+   \caption{Kvaternioni $u$, $\nu$ ter preslikani $\nu$.}
+\end{figure}
+
+
 \newpage
 
 
