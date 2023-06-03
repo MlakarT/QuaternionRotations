@@ -47,11 +47,12 @@ Oddelek za matematiko}
 
 
 \maketitle
+\vspace{5em}
 \tableofcontents
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\newpage
 \section{Uvod}
 
 Rotacije prostora $\R^3$ navadno opišemo z linearnimi preslikavami prostora oziroma njim pripadajočimi matrikami.
@@ -61,17 +62,16 @@ da se da vsako rotacijo opisati s tremi parametri oziroma koti.
 Težava nastopi, ko moramo tako rotacijo zapisati. Za vsakega od kotov potrebujemo svojo preslikavo, ki jo
 nato komponiramo z drugima dvema, da dobimo končno preslikavo:
 \begin{center}
-   $R = BCD$,
+   $R = R_{1}R_{2}R_{3}$,
 \end{center}
 kjer je $R$ končna rotacija, $B, C, D$ pa so rotacije posameznih ravnin glede na želeni kot/parameter.
 Za elemente matrike, ki pripada R, potrebujemo 9  podatkov \cite{salamin1979application}, ki jih izračunamo z matričnim množenjem.
 
-V splošnem sistem deluje, vendar problem nastopi, kadar moramo zaporedoma aplicirati več takih preslikav; 
-problem je v številu operacij pri matričnem množenju. To nas motivira, da uporabimo drug, bolj učinkovit pristop.
+Težava je, da je tako računanje časovno zelo zahtevno, zato bomo izpeljali drug, bolj učinkovit našin opisovanja takih transformacij.
 
 Za motivacijo uporabimo analog rotacij v dveh dimenzijah, in sicer množenje kompleksnih števil.
 Spomnio se, da množenje kompleksnega števila $z$ z enotskim komplekstim številom $e^{i\theta}$ zavrti $z$ okoli koordinatnega izhodišča za kot $\theta$.
-Podobno bi želeli narediti v našem, 3-razsežnem prostoru, vendar za to potrebujemo množenje.
+Podobno bi želeli narediti v 3-razsežnem prostoru, vendar za to potrebujemo množenje.
 Ta problem je rešil Sir William Rowan Hamilton \cite{shoemake1985animating}, ko je oktobra leta 1843 na mostu Brougham Bridge dognal identitete za množenje v 4-razsežnem prostoru.
 Ta ugotovitev je bila tako odmevna, da je trenutek za vedno zabeležen v kamnu na mostu, kjer je vklesano
 \begin{center}
