@@ -351,7 +351,7 @@ saj ce $\alpha \in \R$ in $q \in \R^3$, je $\dotpr{\alpha}{q} = \frac{1}{2} (\co
 Torej je dalje skalarni produkt enak $\frac{1}{2}(\alpha q - \alpha q) = 0$. Prostor skalarjev je torej invarianten za preslikavo $C$.
 
 \begin{izrek}
-Naj bo $u \in \Ue$ in $\theta \in \R$. Preslikava $C = C_{q, \conj{q}}$ je rotacija ravnine, 
+Naj bo $u \in \Ue$ in $\theta \in \R$. Preslikava $C = C_{q, \conj{q}}$, kjer je $q = e^{u\theta}$, je rotacija ravnine, 
 pravokotne na $u$ za kot $2\theta$.
 \end{izrek}
 \break
@@ -402,6 +402,41 @@ Preslikava C torej predstavlja transformacijo $\H$, ki fiksira skalarje $\R$ in 
 \qed
 
 Omenimo še, da $C$ ohranja orientacijo, saj je ortogonalna preslikava. Imamo torej rotacijo ravnine v pozitivni smeri. ~\cite{weiner2005quaternions}
+\subsubsection{Primer uporabe}
+\begin{zgled}
+   Preslikajmo $(1, -2, 3)$ za kot $\frac{\pi}{4}$ okoli smeri $(1,1,1)$.
+\end{zgled}
+Imamo kvaterniona $v = 0 + (1,-2,3)$ in $u = 0 + \frac{1}{\sqrt{3}}(1,1,1)$.
+Najprej izračunajmo kvaternion, s katerim bomo množili:
+\begin{center}
+   $q = e^{u\frac{\pi}{8}} = \cos\frac{\pi}{8} + \frac{1}{\sqrt{3}}\sin\frac{\pi}{8}(1,1,1)$.
+\end{center}
+Preslikamo v:
+\begin{center}
+   $Cv = qv\conj{q} = (\cos\frac{\pi}{8} + \frac{1}{\sqrt{3}}\sin\frac{\pi}{8}(1,1,1))(1,-2,3)(\cos\frac{\pi}{8} - \frac{1}{\sqrt{3}}\sin\frac{\pi}{8}(1,1,1))$
+\end{center}
+Za lažje računanje označimo $\cos\frac{\pi}{8} = a$ in $\sin\frac{\pi}{8} = b$. 
+Najprej izračunajmo $v\conj{q}$:
+\begin{align*}
+   v\conj{q} &= v\cdot\vec{q} + q_{0}v - v \times \vec{q}\\
+             &= \frac{2}{\sqrt{3}} b + a (1,-2,3) - \frac{1}{\sqrt{3}}b(-5,2,3)\\
+             &= \frac{2}{\sqrt{3}}b + \bigl( a + \frac{5}{\sqrt{3}}b, -2 a - \frac{2}{\sqrt{3}}b, 3a - \frac{3}{\sqrt{3}}b \bigr)\\
+             &= q'_{0} + \vec{q'}.
+\end{align*}
+Izračunamo še $qq'$:
+\begin{align*}
+   qq' &= q_{0}q'_{0} - \vec{q}\vec{q'} + q_{0}\vec{q'} + q'_{0}\vec{q} + \vec{q} \times \vec{q'}\\
+       &= a \cdot \frac{2}{\sqrt{3}}b - \frac{1}{\sqrt{3}}b(1,1,1)\bigl( a + \frac{5}{\sqrt{3}}b, -2 a - \frac{2}{\sqrt{3}}b, 3a - \frac{3}{\sqrt{3}}b \bigr)\\
+       &+ a \bigl( a + \frac{5}{\sqrt{3}}b, -2 a - \frac{2}{\sqrt{3}}b, 3a - \frac{3}{\sqrt{3}}b \bigr)\\
+       &+ \frac{2}{\sqrt{3}}b \cdot \frac{1}{\sqrt{3}}b(1,1,1)\\
+       &+ \frac{1}{\sqrt{3}}b(1,1,1) \times \bigl( a + \frac{5}{\sqrt{3}}b, -2 a - \frac{2}{\sqrt{3}}b, 3a - \frac{3}{\sqrt{3}}b \bigr)\\
+       &= \frac{2}{\sqrt{3}}ab - \frac{2}{\sqrt{3}}ab\\
+       &+ \bigl(a^2 + \frac{5}{\sqrt{3}}ab, -2a^2 - \frac{2}{\sqrt{3}}ab, 3a^2 - \frac{3}{\sqrt{3}}ab \bigr)\\
+       &+ \frac{2}{3}(b^2, b^2, b^2)\\
+       &+ \bigl( \frac{5}{\sqrt{3}}ab - \frac{1}{3}b^2, -\frac{2}{\sqrt{3}}ab + \frac{8}{3}b^2, -\frac{3}{\sqrt{3}}ab -\frac{7}{3}b^2\bigr).
+\end{align*}
+Če vstavimo nazaj vrednosti $a$ in $b$, dobimo kvaternion $0 + (2.94, -2.04, 1.09)$
+
 
 \subsection{Izbira baze}
 
@@ -443,13 +478,14 @@ Ker sta $v$ in $w$ odvisna le od $u$ in $\nu$, zapišimo sliko glede na njiju:
         &= \dotpr{\nu}{u}(1 - \cos\theta)u + \cos\theta \nu + \sin\theta u\times\nu.
 \end{align*}
 Tukaj opazimo, da velja naslednja enakost: $u(\nu - \dotpr{\nu}{u}u) = u\times\nu$. S tem smo zapisali sliko poljubnega kvaterniona pri željeni rotaciji.
+Izpeljali smo formulo za rotacijo poljubnega vektorja okoli poljubne smeri za željeni kot.
 \subsubsection{Primer uporabe}
 
 \begin{zgled}
-   Preslikajmo $(1, -2, 3)$ za kot $\frac{\pi}{4}$ okoli smeri $(1,1,1)$.
+   Preslikajmo $(1, -2, 3)$ za kot $\frac{\pi}{4}$ okoli smeri $(1,1,1)$ še po izpeljani formuli.
 \end{zgled}
 Vzamemo kvaterniona $\nu = (1, -2, 3), u = \frac{1}{\sqrt{3}}(1,1,1)$.
-\begin{figure}[h]
+\begin{figure}[ht]
    \centering
    \includegraphics[width = 0.5\textwidth]{vektorji_u_nu}
    \caption{Kvaterniona $\nu$ in $u$ v $\R^3$.}
@@ -475,7 +511,7 @@ Vstavimo $u$ in $\nu$ ter dobljene rezultate v končo formulo
         &\approxeq (2.94, -2.04, 1.09).
 \end{align*}
 
-\begin{figure}[h]
+\begin{figure}[ht]
    \centering
    \includegraphics[width = 0.5\textwidth]{vektorji_nu_nu2}
    \caption{Kvaternioni $u$, $\nu$ ter preslikani $\nu$.}
