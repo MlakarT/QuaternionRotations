@@ -18,8 +18,8 @@
 \def\E{\mathbb{E}} % evklidski prostor 
 \def\Qe{\textbf{Q}_{e}} % mnozica versorjev
 \def\Ue{\textbf{U}_{e}} % mnozica pravih versorjev
-\def\1{\textbf{\emph{1}}}
-\newcommand{\geslo}[2]{\noindent\textbf{#1} \quad \hangindent=1cm #2\\[-1pc]}
+\def\1{\textbf{1}}
+\newcommand{\geslo}[2]{\noindent\textbf{#1} \quad \hangindent=1cm #2 \\}
 \newcommand{\dotpr}[2]{\langle #1, #2 \rangle}
 \newcommand{\conj}[1]{\overline{#1}}
 
@@ -45,9 +45,8 @@ Oddelek za matematiko}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 \maketitle
-\vspace{5em}
+\newpage
 \tableofcontents
 
 
@@ -55,25 +54,30 @@ Oddelek za matematiko}
 \newpage
 \section{Uvod}
 
-Rotacije prostora $\R^3$ navadno opišemo z linearnimi preslikavami prostora oziroma njim pripadajočimi matrikami.
-V splošni uporabi je za opis orientacije objekta tako imenovan \emph{sistem Eulerjevih kotov}. Znameniti \emph{Eulerjev izrek o rotacijah} namreč pravi,
-da se da vsako rotacijo opisati s tremi parametri oziroma koti.
+Rotacije prostora $\R^3$ po navadi opišemo z linearnimi preslikavami oziroma njim pripadajočimi matrikami. Za take preslikave potrebujemo 4 podatke,
+in sicer kot rotacije, ter tri koordinate, ki predstavljajo smer, okoli katere rotiramo prostor,
+vendar je uporaba matrik računsko zelo zahtevna. V ta namen bomo v članku pogledali, kako lahko z uporabo kvaternionov 
+opišemo rotacije na preprostejši in računsko manj zahteven način.
 
-Težava nastopi, ko moramo tako rotacijo zapisati. Za vsakega od kotov potrebujemo svojo preslikavo, ki jo
-nato komponiramo z drugima dvema, da dobimo končno preslikavo:
-\begin{center}
-   $R = R_{1}R_{2}R_{3}$,
-\end{center}
-kjer je $R$ končna rotacija, $B, C, D$ pa so rotacije posameznih ravnin glede na želeni kot/parameter.
-Za elemente matrike, ki pripada R, potrebujemo 9  podatkov \cite{salamin1979application}, ki jih izračunamo z matričnim množenjem.
+% Rotacije prostora $\R^3$ navadno opišemo z linearnimi preslikavami prostora oziroma njim pripadajočimi matrikami.
+% V splošni uporabi je za opis orientacije objekta tako imenovan \emph{sistem Eulerjevih kotov}. Znameniti \emph{Eulerjev izrek o rotacijah} namreč pravi,
+% da se da vsako rotacijo opisati s tremi parametri oziroma koti.
 
-Težava je, da je tako računanje časovno zelo zahtevno, zato bomo izpeljali drug, bolj učinkovit našin opisovanja takih transformacij.
+% Težava nastopi, ko moramo tako rotacijo zapisati. Za vsakega od kotov potrebujemo svojo preslikavo, ki jo
+% nato komponiramo z drugima dvema, da dobimo končno preslikavo:
+% \begin{center}
+%    $R = R_{1}R_{2}R_{3}$,
+% \end{center}
+% kjer je $R$ končna rotacija, $R_{1}, R_{2}, R_{3}$ pa so rotacije posameznih ravnin glede na želeni kot/parameter.
+% Za elemente matrike, ki pripada R, potrebujemo 9  podatkov \cite{salamin1979application}, ki jih izračunamo z matričnim množenjem.
+
+% Težava je, da je tako računanje časovno zelo zahtevno, zato bomo izpeljali drug, bolj učinkovit našin opisovanja takih transformacij.
 
 Za motivacijo uporabimo analog rotacij v dveh dimenzijah, in sicer množenje kompleksnih števil.
-Spomnio se, da množenje kompleksnega števila $z$ z enotskim komplekstim številom $e^{i\theta}$ zavrti $z$ okoli koordinatnega izhodišča za kot $\theta$.
-Podobno bi želeli narediti v 3-razsežnem prostoru, vendar za to potrebujemo množenje.
-Ta problem je rešil Sir William Rowan Hamilton \cite{shoemake1985animating}, ko je oktobra leta 1843 na mostu Brougham Bridge dognal identitete za množenje v 4-razsežnem prostoru.
-Ta ugotovitev je bila tako odmevna, da je trenutek za vedno zabeležen v kamnu na mostu, kjer je vklesano
+Spomnimo se, da množenje kompleksnega števila $z$ z enotskim kompleksnim številom $e^{i\theta}$ zavrti $z$ okoli koordinatnega izhodišča za kot $\theta$.
+Podobno bi želeli narediti v 3-razsežnem prostoru, vendar za to potrebujemo množenje trikomponentnih števil.
+Ta problem je rešil Sir William Rowan Hamilton \cite{shoemake1985animating}, ko je oktobra leta 1843 dognal identitete za množenje v 4-razsežnem prostoru.
+Ta ugotovitev je bila tako odmevna, da je trenutek za vedno zabeležen v kamnu na mostu, kjer je vklesano \footnote[1]{Besedilo je vzeto iz slike spomenika W. R. Hamiltonu, ki danes stoji ob mostu Brougham Brige v Dublinu. Slike so iz arhiva matematika Johna Baeza ~\cite{baez2004baezstuff}.}
 \begin{center}
    \emph{ Here as he walked by
    on the 16th of October 1843
@@ -82,12 +86,20 @@ Ta ugotovitev je bila tako odmevna, da je trenutek za vedno zabeležen v kamnu n
    the fundamental formula for
    quaternion multiplication}\\
    $i^2 = j^2 = k^2 = ijk = -1$\\
-   \emph{ \& cut it on a stone of this bridge}. ~\cite{baez2004baezstuff}
+   \emph{ \& cut it on a stone of this bridge}.
 \end{center}
 
-Ekvivalentno Eulerjevim kotom s pomočjo kvaternionov dobimo tako imenovane \emph{Eulerjeve parametre}, s katerimi
-lahko poljubno rotacijo/orientacijo opišemo samo s štirimi parametri. Prav tako je za večkratno apliciranje preslikav rotacij sedaj
-potrebnih veliko manj operacij. To nas motivira, da predpise preslikav rotacij zapišemo s kvaternionskim množenjem.
+%about retrieving angles and lines of symmetry as well as composition.
+
+Pri uporabi matrik njihov geometrijski pomen ni takoj očiten. Za smer rotacije in kot potrebujemo nekaj dodatnih korakov. Če želimo komponirati več rotacij, potrebujemo množenje matrik, kar pa spet zahteva veliko računskih operacij.
+Kvaternioni nam omogočajo, da na preprost način poiščemo smer in kot že iz zapisa kvaterniona, kompozicija pa se nam prevede na množenje kvaternionov. Za to potrebujemo precej manj operacij.
+
+V članku bomo pogledali osnovne definicije \emph{kvaternionske algebre}, pravokotnosti ter komutativnosti kvaternionov in njihov polarni zapis.
+Kasneje si bomo ogledali predstavitev preslikave rotacije s kvaternioni ter izpeljali formulo za rotacijo poljubnega vektorja v $\R^3$.
+
+% Ekvivalentno Eulerjevim kotom s pomočjo kvaternionov dobimo tako imenovane \emph{Eulerjeve parametre}, s katerimi
+% lahko poljubno rotacijo/orientacijo opišemo samo s štirimi parametri. Prav tako je za večkratno apliciranje preslikav rotacij sedaj
+% potrebnih veliko manj operacij. To nas motivira, da predpise preslikav rotacij zapišemo s kvaternionskim množenjem.
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -95,28 +107,52 @@ potrebnih veliko manj operacij. To nas motivira, da predpise preslikav rotacij z
 \section{Kvaternionska algebra}
 \subsection{Definicije in oznake}
 
-\begin{definicija}
-Naj bo $V$ $4$-razsežen vektorski prostor nad $R$. Izberemo bazo $\left\{\1, i, j, k\right\}$. Elementi $V$ so oblike $\textbf{q} = q_{0}\1 + q_{1}i + q_{2}j + q_{3}k = q_{0} + \vec{q}$, imenujemo jih \emph{kvaternioni}.
-Vektorski prostor $V$ opremimo z operacijo množenja tako, da definiramo množenje njegovih baznih elementov, in sicer
+Najprej vpeljimo pojem \emph{Kvaternionske algebre}. Definicije v tem poglavju smo povzeli po Yan-Binu ~\cite{jia2008quaternions} in Weinerju ~\cite{weiner2005quaternions}.
+
+Naj bo $\H$ $4$-razsezem vektorski prostor nad $\R$. Bazne elemente označimo z $\left\{\1, i, j, k\right\}$,
+elemente prostora $\H$ pišemo $q = q_{0}\1 + q_{1}i + q_{2}j + q_{3}k = q_{0} + \vec{q}$ in jih imenujemo \emph{kvaternioni}. Definiramo običajno seštevanje in množenje s skalarjem za vektorske prostore
+\begin{center}
+   $p + q = \left( p_{0} + q_{0} \right) + \left( \vec{p} + \vec{q} \right)$, \\
+   $ \lambda q = \lambda \left(q_{0} + \vec{q} \right) = \lambda q_{0} + \left(\lambda \vec{q}\right) $.
+\end{center}
+\noindent Vektorski prostor opremimo z operacijo množenja tako, da definiramo \emph{produkte njegovih baznih elementov}, in sicer
 \begin{center}
    $\1 \1 = \1, \hspace{1em}  \1i = i, \hspace{1em} \1j = j, \hspace{1em} \1k = k,$\\
    $ij = k, \hspace{1em} jk = i, \hspace{1em} ki = j,$\\
    $i^2 = j^2 = k^2 = ijk = -1\1$.
 \end{center}
-
-Naj bosta $p, q \in \H$. Definiramo seštevanje in množenje s skalarjem kot običajno
-\begin{center}
-   $p + q = \left( p_{0} + q_{0} \right) + \left( \vec{p} + \vec{q} \right)$, \\
-   $ \lambda q = \lambda \left(q_{0} + \vec{q} \right) = \lambda q_{0} + \left(\lambda \vec{q}\right) $.
-\end{center}
-Prav tako definiramo običajno množenje v skladu z definicijo množenja baznih elementov. Tedaj lahko
-produkt $pq$ napišemo kot
+Množenje tako prevedemo na množenje baznih elementov in lahko produkt elementov $p$ in $q$ napišemo kot
 \begin{center}
    $pq = (p_{0} q_{0} - \vec{p} \vec{q}) + (p_{0}\vec{q} + q_{0}\vec{p} + \vec{p}\times\vec{q})$,
 \end{center}
-kjer je $\vec{p}\vec{q}$ običajni skalarni produkt v $\R^3$.
-Tedaj $V$ postane $4$-razsežna algebra nad $\R$, označimo $\H$ in jo imenujemo \emph{Kvaternionska algebra}.\emph{~\cite{dam1998quaternions}}
+kjer je $\vec{p}\vec{q}$ običajni skalarni produkt, $\vec{p} \times \vec{q}$ pa vektorski produkt v $\R^3$.
+\begin{definicija}
+   Vektorski prostor $\H$, opremljen s zgoraj definirano operacijo množenja, imenujeno \emph{kvaternionska algebra}.
 \end{definicija}
+Omenimo še, da v $\H$ tako definirano množenje ni komutativno, razmislek prepustimo bralcu. O komutativnosti kvaternionov bomo več povedali v kasnejšem razdelku. 
+
+% \begin{definicija}
+% Naj bo $V$ $4$-razsežen vektorski prostor nad $\R$. Izberemo bazo $\left\{\1, i, j, k\right\}$. Elementi $V$ so oblike $\textbf{q} = q_{0}\1 + q_{1}i + q_{2}j + q_{3}k = q_{0} + \vec{q}$, imenujemo jih \emph{kvaternioni}.
+% Vektorski prostor $V$ opremimo z operacijo množenja tako, da definiramo množenje njegovih baznih elementov, in sicer
+% \begin{center}
+%    $\1 \1 = \1, \hspace{1em}  \1i = i, \hspace{1em} \1j = j, \hspace{1em} \1k = k,$\\
+%    $ij = k, \hspace{1em} jk = i, \hspace{1em} ki = j,$\\
+%    $i^2 = j^2 = k^2 = ijk = -1\1$.
+% \end{center}
+
+% Naj bosta $p, q \in \H$. Definiramo seštevanje in množenje s skalarjem kot običajno
+% \begin{center}
+%    $p + q = \left( p_{0} + q_{0} \right) + \left( \vec{p} + \vec{q} \right)$, \\
+%    $ \lambda q = \lambda \left(q_{0} + \vec{q} \right) = \lambda q_{0} + \left(\lambda \vec{q}\right) $.
+% \end{center}
+% Prav tako definiramo običajno množenje v skladu z definicijo množenja baznih elementov. Tedaj lahko
+% produkt $pq$ napišemo kot
+% \begin{center}
+%    $pq = (p_{0} q_{0} - \vec{p} \vec{q}) + (p_{0}\vec{q} + q_{0}\vec{p} + \vec{p}\times\vec{q})$,
+% \end{center}
+% kjer je $\vec{p}\vec{q}$ običajni skalarni produkt v $\R^3$.
+% Tedaj $V$ postane $4$-razsežna algebra nad $\R$, označimo $\H$ in jo imenujemo \emph{Kvaternionska algebra}.\emph{~\cite{dam1998quaternions}}
+% \end{definicija}
 \begin{opomba}
 Za $p,q \in \H, \lambda \in \R$ velja
 \begin{center}
@@ -126,18 +162,18 @@ Za $p,q \in \H, \lambda \in \R$ velja
 \begin{definicija}
 Naj bo $q = q_{0} + \vec{q}\in \H$. S $\overline{q} = q_{0} -\vec{q}$ označimo \emph{konjugirani kvaternion} q.
 \end{definicija}
-Velja, da je $q\overline{q} \in \R$. Tako lahko definiramo še 
+Bralec lahko preveri, da je $q\conj{q} \in \R$. Tako lahko definiramo še 
 \begin{center}
    $q^{-1} = \dfrac{1}{q\overline{q}} \overline{q}$.
 \end{center}
 Prav tako lahko vidimo da je $\overline{p \cdot q} = \overline{q} \cdot \overline{p}$. Ker množenje kvaternionov ni komutativno,
-v splošnem $\overline{pq} \neq \overline{qp}$. Ker je $\H$ algebra, je na njej smiselno definirati skalarni produkt.
+v splošnem $\overline{pq} \neq \overline{qp}$. Potrebujemo še pomen pravokotnosti v algebri $\H$, zato definiramo skalarni produkt.
 
 \break
 \begin{definicija}
 Naj bosta $p,q \in \H$. Definiramo skalarni produkt kvaternionov
 \begin{center}
-   $\dotpr{p}{q} = \frac{1}{2} (\overline{p}q + \overline{q}p)$.\emph{~\cite{weiner2005quaternions}}
+   $\dotpr{p}{q} = \frac{1}{2} (\overline{p}q + \overline{q}p)$.
 \end{center}
 Norma porojena s skalarnim produktom je tedaj
 \begin{center}
@@ -146,10 +182,10 @@ Norma porojena s skalarnim produktom je tedaj
 \end{definicija}
 
 \begin{opomba}
-Iz definicije skalarnega produkta takoj sledi $\langle q, q\rangle = q\overline{q} = \overline{q}q$.
-Podobno kot absolutna vrednost na $\R$ in $\C$ je norma na kvaternionih multiplikativna.
+Iz definicije skalarnega produkta takoj sledi $\dotpr{q}{q} = q\conj{q} = \conj{q}q$.
+Norma na $\H$ je multiplikativna.
 \end{opomba}
-Za poljubna $p,q \in \H$ torej velja $|pq| = |p||q|$. Oglejmo si $|pq|^2$
+Za poljubna $p,q \in \H$ torej velja $|pq| = |p||q|$.
 \begin{center}
    $|pq|^2 = \langle pq, pq \rangle = pq\overline{pq}$.
 \end{center}
@@ -157,14 +193,13 @@ Spomnimo se, da $\overline{p \cdot q} = \overline{q} \cdot \overline{p}$. Torej 
 \begin{center}
    $pq\overline{pq} = p\cdot q\cdot \overline{q} \cdot \overline{p} = p |q|^2 \overline{p}$.
 \end{center}
-Ker je $|q|^2$ skalar, pri množenju komutira s kvaternioni. Torej
+Ker je $|q|^2$ skalar, pri množenju komutira s kvaternioni. 
 \begin{center}
    $p|q|^2\overline{p} = |q|^2p\overline{p} = |q|^2 |p|^2 = |p|^2 |q|^2$.
 \end{center}
-Sledi torej $|pq| = |p||q|$. ~\cite{weiner2005quaternions}
+Sledi torej $|pq| = |p||q|$.
 
-Podobno kot pri rotaciji kompleksne ravnine, kjer množimo s števili iz enotske krožnice, tukaj potrebujemo 
-enotske kvaternione.
+Analogno kompleksni ravnini, kjer potrebujemo enotska kompleksna števila, bomo za rotacijo potrebovali enotske kvaternione.
 
 \begin{definicija}
    Naj bo $q \in \H$. Kvaternion q imenujemo \emph{versor} oziroma \emph{enotski kvaternion}, če velja
@@ -172,45 +207,44 @@ enotske kvaternione.
 
    Če za $u \in \H $ velja $u = \vec{u}$ in $|u| = 1$, kvaternion u imenujemo \emph{čisti} oziroma \emph{pravi} versor.
    Množico pravih versorjev označimo z $\Ue$.
-
-   Z $\R$ od tu naprej označujemo $\{ q \in \H; \vec{q} = 0 \}$ množico skalarnih kvaternionov, podobno od tu naprej z $\R^3$ označujemo
-   množico čistih kvaternionov $\{q \in \H; q_{0} = 0 \}$. \emph{~\cite{weiner2005quaternions}}
 \end{definicija}
+
+Z $\R$ od tu naprej označujemo $\{ q \in \H; \vec{q} = 0 \}$ množico skalarnih kvaternionov, podobno od tu naprej z $\R^3$ označujemo
+množico čistih kvaternionov $\{q \in \H; q_{0} = 0 \}$.
+Omenimo, da je $\Qe$ podgrupa edinka za množenje.
 %%%% TUKI SE NEKI MANKA SAM NEVEM KAJ TOCN
 \begin{opomba}
-   Za čista versorja $u, v \in \Ue$ velja, da 
+   Za čista versorja $u, v \in \Ue$ velja
    \begin{center}
       $\dotpr{u}{v} = 0 \iff uv + vu = 0$.
    \end{center}
 \end{opomba}
-Naj bosta $u, v \in \Ue$. Za poljuben versor iz $\Ue$ velja $\overline{u} = -u$. Pogledamo $\dotpr{u}{v}$ :
+Naj bosta $u, v \in \Ue$. Za poljuben versor iz $\Ue$ velja $\overline{u} = -u$.
 \begin{center}
    $\dotpr{u}{v} = \frac{1}{2}(\overline{u}v + \overline{v}u) = \frac{1}{2}(-uv -vu) = -\frac{1}{2}(uv + vu)$.
 \end{center}
-Od tu sledi da $\dotpr{u}{v} = 0 \iff uv + vu = 0$.
-
+Od tu sledi, da je $\dotpr{u}{v} = 0$ natanko tedaj, ko je $uv + vu = 0$.
+\newpage
+\noindent
 Tukaj opomnimo še naslednje: naj bo $u \in \Ue$. Ker $|u| = 1$ sledi, da je $u$ neničeln kvaternion.
 Ker je $\Ue \subset \H$ in je $\H$ algebra, je vsak neničenli kvaternion obrnljiv. Vemo torej, da obstaja tak $u^{-1}$ da je
 \begin{center}
    $uu^{-1} = 1$.
 \end{center}
-Ker je za poljuben $q \in \H, q^{-1} = \dfrac{1}{\overline{q}q} \overline{q}$, za $u \in \Ue$ pa velja $u\overline{u} = |u|^2$, je 
+Ker za poljuben $q \in \H$ velja $q^{-1} = \dfrac{1}{\overline{q}q} \overline{q}$, za $u \in \Ue$ pa $u\overline{u} = |u|^2$, je 
 \begin{center}
    $u^{-1} = \dfrac{\overline{u}}{|u|^2} = \dfrac{-u}{1} = -u$.
 \end{center}
-Če združimo ti dve dejstvi, velja še naslednja enakost:
+Če združimo ti dve dejstvi, velja
 \begin{center}
    $uu^{-1} = -uu = -u^2 = 1 \Rightarrow u^2 = -1$.
 \end{center}
 
 \subsection{Zapis  kvaternionov v polarni obliki}
 
-Podobno kot kompleksna števila lahko kvaternione zapišemo v polarni obliki. T.j.
-kompleksno število $z = \text{x} + i\text{y}$ lahko zapišemo kot $|z|( \cos\theta + i\sin\theta )$. Z \emph{eulerjevo formulo} lahko to kompleksno število
-zapišemo kot $z = e^{i\theta}$.
-
-V kompleksni ravnini je ta zapis dobro definiran, saj imamo le eno kompleksno enoto $i$.
-V kvaternionih pa imamo celo množico čistih enotskih kvaternionov $\Ue$, s katerimi lahko zapišemo kvaternion.
+Podobno kot kompleksna števila lahko kvaternione zapišemo v polarni obliki. Število $z = \text{x} + i\text{y}$ zapišemo kot $|z|( \cos\theta + i\sin\theta )$, z \emph{eulerjevo formulo} pa ga 
+zapišemo kot $z = |z|e^{i\theta}$. V kompleksni ravnini je ta zapis dobro definiran, saj imamo le eno kompleksno enoto $i$,
+v kvaternionih pa imamo celo množico čistih enotskih kvaternionov $\Ue$, s katerimi lahko zapišemo kvaternion.
 
 \begin{trditev}
 Naj bo $q \in \Qe$. Tedaj obstajata $\theta \in \R$ in $u \in \Ue$, da je
@@ -230,21 +264,21 @@ Velja torej
 \end{center}
 \qed
 
-\noindent Dokaz je povzet po Lyonsu. \cite{2021Quaternions}
+\noindent Dokaz trditve je povzet po Lyonsu. \cite{2021Quaternions}
 \begin{opomba}
-Opazimo, da nam trditev zagotavlja \emph{le obstoj} in ne enoličnosti.
+Tdritev nam zagotavlja \emph{le obstoj} in ne enoličnosti.
 \end{opomba}
 \break
-Preprost protiprimer za enoličnost je $q \in \Qe, q = \1\cos\theta + u\sin\theta$.
-Pogledamo $\theta' = -\theta$ in $u' = \conj{u} = -u$. Tedaj je
+Preprost protiprimer za enoličnost je naslednji: vzemimo $q \in \Qe, q = \1\cos\theta + u\sin\theta$ ter poglejmo
+$\theta' = -\theta$ in $u' = \conj{u} = -u$. Tedaj je
 \begin{center}
    $\1\cos\theta' + u'\sin\theta' = \1\cos(-\theta) -u\sin(-\theta) = \1\cos\theta + u\sin\theta = q$.
 \end{center}
 Vidimo, da ima q torej $2$ zapisa. Podobno sklepanje ponovimo za kvaternion 0. Za kvaternion 0 v enakosti zadoščata vsaka $u \in \Ue$ in $\theta \in \R$, saj je 0 možno dobiti le z množenjem enotskega kvaterniona
 s skalarjem 0.
    
-Zaradi lažjega računanja bomo polarni zapis kvaternionov spremeniti v eksponentni zapis. Spet se najprej spomnimo kompleksne ravnine, kjer lahko
-vsak $z \in \C$ zapišemo kot $|z|e^{i\varphi}$ za nek $\varphi \in \R$. To naredimo, saj je tako
+Zaradi lažjega računanja bomo polarni zapis kvaternionov spremenili v eksponentni zapis. Spet se najprej spomnimo kompleksne ravnine, kjer lahko
+vsak $z \in \C$ zapišemo kot $|z|e^{i\varphi}$ za nek $\varphi \in \R$. To naredimo, saj je
 algebraična manipulacija kompleksnih izrazov lažja.
 
 Vzamemo Taylorjev razvoj $e^t$:
@@ -255,32 +289,27 @@ V Taylorjev razvoj vstavimo $t = u\theta, u \in \Ue, \theta \in \R$. Dobimo %Tuk
 \begin{center}
    $e^{u\theta} = 1 + u\theta + \dfrac{(u\theta)^2}{2} + \dfrac{(u\theta)^3}{6} + \dfrac{(u\theta)^4}{24} + \cdots$.
 \end{center}
-Spomnimo se, da ker je $u \in \Ue$, velja $u^2=-1$. Ker $e^t$ konvergira enakomerno povsod, lahko vrsto preuredimo, in sicer:
+Spomnimo se, da velja $u^2=-1$, ker je $u \in \Ue$. Ker $e^t$ konvergira absolutno, lahko vrsto preuredimo, in sicer:
 \begin{center}
    $1 + u\theta + \dfrac{(u\theta)^2}{2} + \dfrac{(u\theta)^3}{6} + \dfrac{(u\theta)^4}{24} + \cdots = (1 + \dfrac{(u\theta)^2}{2} + \dfrac{(u\theta)^4}{24}+ \cdots) + (u\theta + \dfrac{(u\theta)^3}{6} + \cdots) = $
    $(1-\dfrac{\theta^2}{2}+\dfrac{\theta^4}{24}- \cdots) + u(\theta - \dfrac{\theta^3}{6} +\dfrac{\theta^5}{120} - \cdots)$
 \end{center}
-V levem in desnem oklepaju vidimo Taylorjev razvoj funkcij $\cos$ in $\sin$. Sledi torej
+V levem in desnem oklepaju vidimo Taylorjev razvoj funkcij kosinus in sinus. Sledi torej
 \begin{center}
    $e^{u\theta} = \cos\theta  + u\sin\theta$.
 \end{center}
 Zgornjo trditev lahko sedaj spremenimo v lepšo obliko, t.j. za vsak $q \in \Qe$ obstajata
 $\theta \in \R$ in $u \in \Ue$, da velja $q =  e^{u\theta}$.
 
-\begin{opomba} 
-Naj bosta $p,q \in \Qe$. Vemo, da produkt kvaternionov ni komutativen, t. j. $p q \neq q p$. Če p in q zapišemo v polarni obliki, 
-$p = e^{u\theta}, q = e^{v\varphi}$, lahko produkta napišemo kot
-\begin{center}
-   $p q = e^{u\theta} e^{v\varphi}$ in $q p = e^{v\varphi}e^{u\theta}$.
-\end{center}
-\end{opomba}
+\subsection{O komutativnosti kvaternionov}
+Naj bosta $p,q \in \Qe$. Vemo, da produkt kvaternionov ni komutativen, t. j. $p q \neq q p$.
+Če p in q zapišemo v polarni obliki, $p = e^{u\theta}, q = e^{v\varphi}$, lahko produkta napišemo kot $p q = e^{u\theta} e^{v\varphi}$ in $q p = e^{v\varphi}e^{u\theta}$.
 Zaradi nekomutativnosti prav tako sledi, da $e^{u\theta} e^{v\varphi} \neq e^{v\varphi}e^{u\theta}$. Če bi tak produkt obstajal, bi v eksponentu imeli primer nekomutativne vsote,
 kar pa je seveda v protislovju z definicijo vsote iz algebre $\H$.
-
-
+\newpage
 Zanima nas, kdaj taki kvaternioni komutirajo.
 \begin{trditev}
-Naj bosta $p,q \in \Qe$ taka, da $\exists u \in \Ue$, da $p = e^{u\theta}$ in $q = e^{u\varphi}$ za neka $\theta, \varphi \in \R$.
+Naj bosta $p,q \in \Qe$ taka, da obstaja $u \in \Ue$, da $p = e^{u\theta}$ in $q = e^{u\varphi}$ za neka $\theta, \varphi \in \R$.
 Tedaj je $pq = qp$.
 \end{trditev}
 \noindent
@@ -331,12 +360,15 @@ Naj bosta $p,q \in \Qe$. S $C: \H \to \H$ označimo kompozitum levega in desnega
    $C_{p,q} = L_{p} \circ R_{q} = R_{q} \circ L_{p}$.
 \end{center}
 \end{definicija}
-C je za poljubna $p,q \in \Qe$ bijektivna in ortogonarlna. Ortogonalnost sledi iz kompozicije dveh ortogonalnih preslikav,
-surjektivnost je očitna. Injektivnost preverimo z uporabo pravil krajšanja v kvaternionski algebri $\H$.
-Če je namreč $C_{p,q}x = C_{p,q}y$, je to enako $pxq = pyq$. Ker lahko kvaternione okrajšamo, sledi $x = y$.
+Preslikava $C_{p,q}$ je za poljubna $p,q \in \Qe$ bijektivna in ortogonarlna. Ortogonalnost sledi iz kompozicije dveh ortogonalnih preslikav,
+surjektivnost je očitna. Injektivnost preverimo z uporabo pravil krajšanja v kvaternionski algebri.
+Namreč, ker kvaternione lahko okrajšamo, iz enakosti $C_{p,q}x = C_{p,q}y$, oziroma $pxq = pyq$, sledi $x = y$.
 
 Naj bodo $p_1, q_1, p_2, q_2 \in \Qe$. Poglejmo preslikavi $C_{p_1, q_1}, C_{p_2,q_2}$. Če preslikavi komponiramo, je rezultat ponovno preslikava take oblike, t.j.
-$C_{p_1 p_2, q_2 q_1}$. Inverz te preslikave je prav tako ortogonalna preslikava, namreč $C^{-1}_{p,q} = C_{p^{-1}, q^{-1}}.$ 
+$C_{p_1 p_2, q_2 q_1}$. Inverz te preslikave je prav tako ortogonalna preslikava, namreč
+\begin{center}
+   $C^{-1}_{p,q} = C_{p^{-1}, q^{-1}}.$
+\end{center} 
 Imamo torej grupo preslikav za komponiranje nad $\Qe$. Izkaže se, da je ta grupa kar grupa avtomorfizmov $\text{Aut} ( \H )$ \cite{brevsar2018skolem}.
 Opomnimo samo, da se pri komponiranju teh preslikav vrstni red desnega množenja obrne.
 
@@ -346,13 +378,12 @@ Preslikavo $C_{q, \conj{q}}$ je torej možno zapisati kot
 \begin{center}
    $Cx := C_{q, \conj{q}} x = e^{u\theta}x e^{-u\theta}$.
 \end{center}
-Ker je $C$ ortogonalna preslikava, ohranja skalarni produkt. Spomnimo se, da so skalarni kvaternioni in čisti kvaternioni pravokotni,
-saj ce $\alpha \in \R$ in $q \in \R^3$, je $\dotpr{\alpha}{q} = \frac{1}{2} (\conj{\alpha}q + \conj{q}\alpha)$. Ker je $\alpha \in \R$, je $\conj{\alpha} = \alpha$.
-Torej je dalje skalarni produkt enak $\frac{1}{2}(\alpha q - \alpha q) = 0$. Prostor skalarjev je torej invarianten za preslikavo $C$.
+Ker je $C$ ortogonalna preslikava, ohranja skalarni produkt. Spomnimo se, da so skalarni kvaternioni in čisti kvaternioni pravokotni. Naj bosta $\alpha \in \R$ in $u \in \R^3$, njun skalarni produkt je $\dotpr{\alpha}{u} = \frac{1}{2} (\conj{\alpha}u + \conj{u}\alpha)$.
+Ker je $\alpha \in \R$, je $\conj{\alpha} = \alpha$. Torej je to dalje enake $\frac{1}{2}(\alpha u - \alpha u) = 0$. Podprostor skalarjev je torej invarianten za preslikavo $C$.
 
 \begin{izrek}
 Naj bo $u \in \Ue$ in $\theta \in \R$. Preslikava $C = C_{q, \conj{q}}$, kjer je $q = e^{u\theta}$, je rotacija ravnine, 
-pravokotne na $u$ za kot $2\theta$.
+pravokotne na $u$, za kot $2\theta$.
 \end{izrek}
 \break
 \noindent
@@ -366,9 +397,9 @@ Spomnimo se, da kvaternioni, izraženi z istim versorjem, med sabo komutirajo. T
 \begin{center}
    $e^{u\theta} u e^{-u\theta} = e^{u\theta}e^{-u\theta}u = u$.
 \end{center}
-Vidimo torej, da je tudi $Lin\{u\}$ invariantna. Preslikava $C$ torej fiksira dve dimenziji prostora $\H$.
+Vidimo, da je tudi $Lin\{u\}$ invariantna. Preslikava $C$ torej fiksira dve dimenziji prostora $\H$.
 Ker je preslikava $C$ ortogonalna, ohranja tudi ortogonalni komplement $Lin\{u\}$.
-Označimo $L^{\bot} = (Lin\{u\})^{\bot}$. Naj bo $v \in L^{\bot}$. Za bazo ravnine, pravokotne na $u$, vzamemo kvaterniona $v$ in $w = uv = u \times w$.
+Označimo $L^{\bot} = (Lin\{u\})^{\bot}$. Naj bo $v \in L^{\bot}$. Za bazo ravnine, pravokotne na $u$, vzamemo kvaterniona $v$ in $w = uv = u \times v$.
 Za $v$ velja naslednje:
 \begin{align*}
    v e^{-u\theta} & = v(\cos\theta -u\sin\theta) \\
@@ -386,8 +417,9 @@ Torej, če s $C$ slikamo $v$:
 \end{center}
 Žapišemo še $w$ kot $w\cos2\theta + wu\sin2\theta = w\cos2\theta - v\sin2\theta$.
 
-Ker je $\H$ algebra, je obenem tudi vektorski prostor. Zato je smiselno napisati matriko preslikave $C$ glede na bazo $\{u, v, w\}$.
-$C$ tedaj ustreza matriki
+Ker je $\H$ algebra, je obenem tudi vektorski prostor. Zato je smiselno napisati matriko preslikave $C$ glede na bazo $\{u, v, w\}$ podprostora $\R^3$.
+
+\noindent Preslikava $C$ tedaj ustreza matriki
 \begin{center}
    $
    \begin{bmatrix}
@@ -401,7 +433,7 @@ Preslikava C torej predstavlja transformacijo $\H$, ki fiksira skalarje $\R$ in 
 
 \qed
 
-Omenimo še, da $C$ ohranja orientacijo, saj je ortogonalna preslikava. Imamo torej rotacijo ravnine v pozitivni smeri. ~\cite{weiner2005quaternions}
+Omenimo še, da $C$ ohranja orientacijo, saj je ortogonalna preslikava. Imamo torej rotacijo ravnine v pozitivni smeri.
 \subsubsection{Primer uporabe}
 \begin{zgled}
    Preslikajmo $(1, -2, 3)$ za kot $\frac{\pi}{4}$ okoli smeri $(1,1,1)$.
@@ -444,7 +476,7 @@ Izračunamo še $qq'$:
 Po prejšnjem izreku vemo, da taki transformaciji zadošča preslikava $Cx = e^{u\frac{\theta}{2}}xe^{-u\frac{\theta}{2}}$. Vemo, da je $Lin\{u\}$ invarianten za C, prav tako pa poznamo sliko kvaterniona,
 pravokotnega na $u$.
 
-Izbrali bomo bazo pravokotnih kvaternionov, saj poznamo njihove slike, nato pa $\nu$ razvili po dobljeni bazi. Prvi bazni kvaternion naj bo kar $u$. Naslednji kvaternion vektor, ki mora biti zavoljo uporabe izreka pravokoten na $u$, dobimo z Gram-Schmidtovo ortogonalizacijo, in sicer:
+Izbrali bomo bazo pravokotnih kvaternionov, saj poznamo njihove slike, nato pa $\nu$ razvili po dobljeni bazi. Prvi bazni kvaternion naj bo kar $u$. Naslednji kvaternion, ki mora biti za uporabo izreka pravokoten na $u$, dobimo z Gram-Schmidtovo ortogonalizacijo, in sicer:
 \begin{align*}
    \text{prvi kvaternion} &\hspace{5em}  u_{1} = u,\\
    \text{drugi kvaternion} &\hspace{5em}   u_{2} = \nu - \dfrac{\dotpr{\nu}{u}}{\dotpr{u}{u}} u,\\
@@ -455,14 +487,14 @@ Kvaternioni so med sabo pravokotni, saj smo uporabili Gram-Schmidtov proces za e
 \begin{center}
    $u_{1} = u$,
 
-   $v = u_{2} = \nu - \dfrac{\dotpr{\nu}{u}}{\dotpr{u}{u}}u = \nu - \dotpr{\nu}{u}u$, saj$\dotpr{u}{u} = 1$.
+   $v = u_{2} = \nu - \dfrac{\dotpr{\nu}{u}}{\dotpr{u}{u}}u = \nu - \dotpr{\nu}{u}u$, saj je $\dotpr{u}{u} = 1$.
 \end{center}
 Kvaterniona ne bomo normalizirali, saj je preslikava $C$ izometrija, in torej ohranja razdalje.
 
 \begin{center}
    $w = u_{3} = u_{1} u_{2} = u (\nu - \dotpr{\nu}{u}u)$.
 \end{center}
-Imamo torej bazo $B = \{u, v, w\} = \{u, \nu - \dotpr{\nu}{u}u, u(\nu - \dotpr{\nu}{u}u)\}$ za $R^3$.
+Imamo torej bazo $B = \{u, v, w\} = \{u, \nu - \dotpr{\nu}{u}u, u(\nu - \dotpr{\nu}{u}u)\}$ za $\R^3$.
 Zapišemo $\nu$ po bazi : $\nu = \dotpr{\nu}{u}u + v$. Ker poznamo slike vseh baznih kvaternionov in je $C$ linearna preslikava,
 lahko sedaj zapišemo sliko poljubnega kvaterniona $\nu$:
 \begin{align*}
@@ -471,14 +503,13 @@ lahko sedaj zapišemo sliko poljubnega kvaterniona $\nu$:
          &= \dotpr{\nu}{u}u + \cos\theta v + \sin\theta w.
 \end{align*}
 
-Ker sta $v$ in $w$ odvisna le od $u$ in $\nu$, zapišimo sliko glede na njiju:
+\noindent Ker sta $v$ in $w$ odvisna le od $u$ in $\nu$, zapišimo sliko glede na njiju:
 \begin{align*}
    C\nu &= \dotpr{\nu}{u}u + \cos\theta v + \sin\theta w\\
         &= \dotpr{\nu}{u}u + \cos\theta (\nu - \dotpr{\nu}{u}u) + \sin\theta u(\nu - \dotpr{\nu}{u}u)\\
         &= \dotpr{\nu}{u}(1 - \cos\theta)u + \cos\theta \nu + \sin\theta u\times\nu.
 \end{align*}
-Tukaj opazimo, da velja naslednja enakost: $u(\nu - \dotpr{\nu}{u}u) = u\times\nu$. S tem smo zapisali sliko poljubnega kvaterniona pri željeni rotaciji.
-Izpeljali smo formulo za rotacijo poljubnega vektorja okoli poljubne smeri za željeni kot.
+Tukaj opazimo, da velja naslednja enakost: $u(\nu - \dotpr{\nu}{u}u) = u\times\nu$. S tem smo zapisali sliko poljubnega kvaterniona pri željeni rotaciji in izpeljali formulo za rotacijo poljubnega vektorja okoli poljubne smeri za željeni kot.
 \subsubsection{Primer uporabe}
 
 \begin{zgled}
@@ -523,25 +554,9 @@ Vstavimo $u$ in $\nu$ ter dobljene rezultate v končo formulo
 
 \section*{Angleško-slovenski slovar strokovnih izrazov}
 
-\geslo{Euler's rotation theorem}{Eulerjev izrek o rotacijah}
-
-\geslo{Euler angles}{Eulerjevi koti}
-
-\geslo{transformation}{transformacija, preslikava}
-
-\geslo{matrix}{matrika}
-
-\geslo{origin}{koordinatno izhodišče}
-
 \geslo{quaternion}{kvaternion}
 
-\geslo{dot product}{skalarni produkt}
-
-\geslo{cross product}{vektorski produkt}
-
 \geslo{quaternion conjugate}{konjugirana vrednost kvaterniona}
-
-\geslo{norm}{norma}
 
 \geslo{unit quaternion}{enotski kvaternion}
 
@@ -549,19 +564,7 @@ Vstavimo $u$ in $\nu$ ter dobljene rezultate v končo formulo
 
 \geslo{versor}{versor, enotski čisti kvaternion}
 
-\geslo{polar form}{polarni zapis, polarna oblika}
-
-\geslo{orthogonal}{pravokoten}
-
-\geslo{Taylor expansion}{Taylorjev razvoj}
-
-\geslo{uniform convergence}{enakomerna konvergenca}
-
-\geslo{orthogonal transformation}{ortogonalna preslikava}
-
 \geslo{isometry}{izometrija}
-
-\geslo{invariant}{invarianten}
 
 \geslo{span}{linearna ogrinjača}
 
